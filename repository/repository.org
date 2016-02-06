@@ -8,22 +8,46 @@
 * リポジトリの種類
 
 
-| 種類                   | 説明                                                           | 主な用途                      |
+| 種類                   | 説明                                                             | 主な用途                          |
 |------------------------+------------------------------------------------------------------+-----------------------------------|
-| ローカルリポジトリ | ローカルPC上にあるリポジトリ( ~/.m2/repository )    | キャッシュ                   |
+| ローカルリポジトリ     | ローカルPC上にあるリポジトリ( ~/.m2/repository )                 | キャッシュ                        |
 | インハウスリポジトリ　 | PJ内で構築したリポジトリ                                         | PJ成果物(jar等)をPJ向けに公開する |
 | リモートリポジトリ     | インターネット上に公開されたリポジトリ(Maven Central, jcenter等) | ライブラリを公開する              |
 
+
+#+BEGIN_SRC plantuml :file ./repositories.png :cmdline -charset UTF-8
+component "ローカルリポジトリ" as local
+component "インハウスリポジトリ" as inhouse
+component "リモートリポジトリ" as remote
+
+local ..> inhouse
+inhouse ..> remote 
+#+END_SRC
+
 #+RESULTS:
-[[file:repositries.png]]
+[[file:./repositories.png]]
+
 
 * ローカルリポジトリ
 
 - ファイルシステム上のキャッシュ(~/.m2/repository)。
 - mavenで使用するライブラリは必ずここにキャッシュされる。
 
+
+#+BEGIN_SRC plantuml :file ./retrieve-local-cache.png :cmdline -charset UTF-8
+hide footbox
+
+actor  "開発者" as dev
+participant "mvn" as mvn
+participant "ローカルリポジトリ" as local
+
+dev -> mvn : mvn compile
+mvn -> local : jar参照
+dev <-- mvn : build success
+#+END_SRC
+
 #+RESULTS:
-[[file:retrieve-local-cache.png]]
+[[file:./retrieve-local-cache.png]]
 
 
 * インハウスリポジトリ
