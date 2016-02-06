@@ -1,3 +1,5 @@
-* Maven¥Á¥å¡¼¥È¥ê¥¢¥ë
+# -*- mode: org; coding: utf-8-unix -*-
+
+* Mavenãƒãƒ¥ãƒ¼ãƒˆãƒªã‚¢ãƒ«
 
 

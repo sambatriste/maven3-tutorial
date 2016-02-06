@@ -1,0 +1,217 @@
+# -*- mode: org; coding: utf-8-unix -*-
+
+#+STARTUP: content
+#+STARTUP: indent
+#+STARTUP: inlineimages
+
+* Hello Maven
+
+** archetypeからプロジェクト作成してみよう
+
+シンプルなpom.xmlから学習するため、
+デフォルトのアーキタイプからプロジェクトを生成します。
+
+#+begin_src sh
+cd
+mdkir tmp
+cd tmp
+mvn archetype:generate
+#+end_src
+
+| 要素       | 入力例　     |
+|------------+--------------|
+| groupId    | com.example  |
+| artifactId | hello        |
+| version    | 1.0-SNAPSHOT |
+| package    | com.example  |
+
+** pom.xmlを見てみよう
+
+#+begin_src sh
+cd hello
+cat pom.xml
+#+end_src
+
+** ビルドしてみよう
+
+| コマンド    | target配下の成果物              | 説明　                     |
+|-------------+---------------------------------+----------------------------|
+| mvn compile | classes/                        | classファイル              |
+| mvn test    | test-classes/,surefire-reports/ | classファイルとレポート    |
+| mvn package | hello-1.0-SNAPSHOT.jar          | jarファイル                |
+| mvn install | -                               | .m2/repositoryに配置される |
+| mvn site    | site                            | レポート                   |
+| mvn clean   | -                               | targetが削除される         |
+
+** IDEに取り込んでみよう
+
+*** Eclipse
+
+#+BEGIN_EXAMPLE
+File->Import -> Existing Maven Project
+#+END_EXAMPLE
+
+
+
+** 暗黙の設定値を確認しよう
+
+*** 完全な設定値を出力する
+
+settings.xmlやparentのpomを含めた設定値を出力します。
+
+#+begin_src sh
+mvn help:effective-pom
+#+end_src
+
+*** 依存関係を出力する
+
+#+begin_src sh
+mvn dependency:tree
+#+end_src
+
+#+begin_example
+[INFO] com.example:hello:jar:1.0-SNAPSHOT
+[INFO] \- junit:junit:jar:3.8.1:test
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+#+end_example
+
+** デフォルトのビルド設定を試してみよう。
+
+| pom.xmlの要素         | 説明                                      |
+|-----------------------+-------------------------------------------|
+| <sourceDirectory>     | ソース置き場                              |
+| <testSourceDirectory> | テストソース置き場                        |
+| <outputDirectory>     | classファイル等の出力先ディレクトリ       |
+| <testOutputDirectory> | テストclassファイル等の出力先ディレクトリ |
+| <resources>           | リソース置き場                            |
+| <testResources>       | テストリソース置き場                      |
+
+*** コンパイル設定
+
+**** ソースを編集してみる。
+
+com.example.App
+
+#+begin_src java
+    public static void main( String[] args )
+    {
+        System.out.println( "Hello Maven!" );
+    }
+#+end_src
+
+#+begin_src bash
+mvn test
+#+end_src
+
+
+*** テストコンパイル設定
+
+src/main配下のクラスで、junitのクラスを使ってみる。
+
+#+begin_src java
+    public static void main( String[] args )
+    {
+        junit.framework.TestCase.assertTrue(true);
+        System.out.println( "Hello World!" );
+    }
+#+end_src
+
+#+begin_src bash
+mvn test
+#+end_src
+
+#+begin_example
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.1:compile (default-compile) on project hello: Compilation failure
+[ERROR] /home/kawasaki/tmp/mvn_test/hello/src/main/java/com/example/App.java:[11,24] パッケージjunit.frameworkは存在しません
+#+end_example
+
+*** リソースの配置
+
+hoge.txtを配置してコンパイルしてみよう。
+hoge.txtはコピーされる？理由は？
+
+**** src/main/java
+
+#+begin_src sh
+touch src/main/java/hoge.txt
+mvn clean compile
+ls target/classes
+#+end_src
+
+**** src/main/resources
+
+#+begin_src sh
+mv src/main/java/hoge.txt src/main/resources/
+mvn clean compile
+ls target/classes
+#+end_src
+
+
+** 設定を変更してみよう
+
+*** versionを変えてみる。
+
+#+begin_src xml
+  <groupId>com.example</groupId>
+  <artifactId>hello</artifactId>
+  <version>1.0.0</version>
+#+end_src
+
+#+begin_src sh
+mvn clean package
+ls target
+#+end_src
+
+*** dependencyを変えてみる。
+
+**** JUnit4.12にしてみる
+
+http://search.maven.org/
+でjunitで検索。
+
+http://search.maven.org/#artifactdetails|junit|junit|4.12|jar
+
+#+begin_src xml
+<dependency>
+    <groupId>junit</groupId>
+    <artifactId>junit</artifactId>
+    <version>4.12</version>
+</dependency>
+#+end_src
+
+依存関係はどう変化しましたか？
+
+#+begin_src sh
+mvn dependency:tree
+#+end_src
+
+#+begin_example
+[INFO] com.example:hello:jar:1.0.0
+[INFO] \- junit:junit:jar:4.12:test
+[INFO]    \- org.hamcrest:hamcrest-core:jar:1.3:test
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+#+end_example
+
+org.hamcrest:hamcrest-coreというライブラリは、なぜ現れたのでしょうか？
+
+
+
+**** 好きなライブラリを足してみよう
+
+#+begin_src xml
+<dependency>
+  <groupId>org.springframework.boot</groupId>
+  <artifactId>spring-boot-starter-web</artifactId>
+  <version>1.3.2.RELEASE</version>
+</dependency>
+#+end_src
+
+依存関係はどう変化しましたか？
+
+#+begin_src sh
+mvn dependency:tree
+#+end_src
