@@ -2,17 +2,28 @@
 #+SETUPFILE: ./conf.org
 #+TITLE: Maven3 チュートリアル
 
-# - [[./hello_maven/hello_maven.html][Hello Maven]]
-# - [[./eclipse/eclipse.html][Eclipse]]
-# - [[./repository/repository.html][Mavenリポジトリ]]
 
 
-#+INCLUDE: hello_maven/hello_maven.org
+* Hello Maven
+
+#+INCLUDE: hello_maven.org
 
 
-#+INCLUDE: eclipse/eclipse.org
+* 依存関係
 
-#+INCLUDE: repository/repository.org
+#+INCLUDE: dependency.org
+
+* スコープ
+
+#+INCLUDE: scope.org
+
+* Eclipseにインポートしてみよう
+ 
+#+INCLUDE: eclipse.org
+
+* Mavenリポジトリ
+
+#+INCLUDE: repository.org
 
 
 

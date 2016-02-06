@@ -1,15 +1,33 @@
 # -*- mode: org; coding: utf-8-unix -*-
 
-#+SETUPFILE: ../conf.org
+#+SETUPFILE: ./conf.org
 #+TITLE: 依存ライブラリ
 
 
-* アーティファクト
+** アーティファクト
 
 mavenでは、あるmavenモジュールから作り出される成果物（典型的にはjarやwarファイル）を
 アーティファクト(artifact ≒ 成果物)と呼びます。
 
-* <dependency>の要素
+** 推移的依存関係
+
+あるアーティファクトAが別のアーティファクトBに依存しているとします。
+自分のモジュールにアーティファクトAを<dependecy>に加えた場合、
+アーティファクトBも依存関係に含まれます。
+これを推移的依存関係といいます。
+
+*** JUnitの例
+
+[[file:./junit_deps.png]]
+
+JUnitはtestスコープで使用しているので、
+hamcrestもtestスコープとなる。
+
+*** Logbackの例
+
+[[file:./logback_deps.png]]
+ 
+** <dependency>の要素
 
 <dependecy>には依存するアーティファクトの情報を記載します。
 
@@ -21,5 +39,5 @@ mavenでは、あるmavenモジュールから作り出される成果物（典�
 | scope      | その依存ライブラリをどの場面で使用するか([[./scope.html][後述]]) | compile             |
 
 
-* versionの考え方
+** versionの考え方
 
