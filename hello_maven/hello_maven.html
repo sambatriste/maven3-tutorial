@@ -1,0 +1,705 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>Hello Maven</title>
+<!-- 2016-02-07 日 00:41 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<meta  name="author" content="T.Kawasaki" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="http://www.pirilampo.org/styles/readtheorg/css/htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="http://www.pirilampo.org/styles/readtheorg/css/readtheorg.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="http://www.pirilampo.org/styles/lib/js/jquery.stickytableheaders.js"></script>
+<script type="text/javascript" src="http://www.pirilampo.org/styles/readtheorg/js/readtheorg.js"></script>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Hello Maven</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1. archetypeからプロジェクト作成してみよう</a></li>
+<li><a href="#sec-2">2. pom.xmlを見てみよう</a>
+<ul>
+<li><a href="#sec-2-1">2.1. pom.xml</a></li>
+</ul>
+</li>
+<li><a href="#sec-3">3. ビルドしてみよう</a></li>
+<li><a href="#sec-4">4. 暗黙の設定値を確認しよう</a>
+<ul>
+<li><a href="#sec-4-1">4.1. 完全な設定値を出力する</a></li>
+<li><a href="#sec-4-2">4.2. 依存関係を出力する</a></li>
+</ul>
+</li>
+<li><a href="#sec-5">5. デフォルトのビルド設定を試してみよう。</a>
+<ul>
+<li><a href="#sec-5-1">5.1. コンパイル設定</a>
+<ul>
+<li><a href="#sec-5-1-1">5.1.1. ソースを編集してみる。</a></li>
+</ul>
+</li>
+<li><a href="#sec-5-2">5.2. テストコンパイル設定</a></li>
+<li><a href="#sec-5-3">5.3. リソースの配置</a>
+<ul>
+<li><a href="#sec-5-3-1">5.3.1. src/main/java</a></li>
+<li><a href="#sec-5-3-2">5.3.2. src/main/resources</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#sec-6">6. 設定を変更してみよう</a>
+<ul>
+<li><a href="#sec-6-1">6.1. versionを変えてみる。</a></li>
+<li><a href="#sec-6-2">6.2. dependencyを変えてみる。</a>
+<ul>
+<li><a href="#sec-6-2-1">6.2.1. JUnit4.12にしてみる</a></li>
+<li><a href="#sec-6-2-2">6.2.2. 好きなライブラリを足してみよう</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+
+
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> archetypeからプロジェクト作成してみよう</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+シンプルなpom.xmlから学習するため、
+デフォルトのアーキタイプからプロジェクトを生成します。
+</p>
+
+
+<div class="org-src-container">
+
+<pre class="src src-sh">mdkir example
+cd example
+mvn archetype:generate
+</pre>
+</div>
+
+<p>
+アーキタイプの種類を選べと言われます。
+</p>
+
+<pre class="example">
+Choose a number or apply filter (format: [groupId:]artifactId, case sensitive contains): 705:
+</pre>
+
+<p>
+そのままエンターキーを押し、デフォルトの705(maven-archetype-quickstart)を選択します。
+</p>
+
+<p>
+その他入力を求められますので以下のように入力します。
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">要素</th>
+<th scope="col" class="left">入力例　</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">groupId</td>
+<td class="left">com.example</td>
+</tr>
+
+<tr>
+<td class="left">artifactId</td>
+<td class="left">hello</td>
+</tr>
+
+<tr>
+<td class="left">version</td>
+<td class="left">1.0-SNAPSHOT</td>
+</tr>
+
+<tr>
+<td class="left">package</td>
+<td class="left">com.example</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> pom.xmlを見てみよう</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+作成されたpom.xmlを眺めてみます。
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">cd hello
+cat pom.xml
+</pre>
+</div>
+</div>
+
+<div id="outline-container-sec-2-1" class="outline-3">
+<h3 id="sec-2-1"><span class="section-number-3">2.1</span> pom.xml</h3>
+<div class="outline-text-3" id="text-2-1">
+<div class="org-src-container">
+
+<pre class="src src-xml">&lt;project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"&gt;
+  &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+
+  &lt;groupId&gt;com.example&lt;/groupId&gt;
+  &lt;artifactId&gt;hello&lt;/artifactId&gt;
+  &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
+  &lt;packaging&gt;jar&lt;/packaging&gt;
+
+  &lt;name&gt;hello&lt;/name&gt;
+  &lt;url&gt;http://maven.apache.org&lt;/url&gt;
+
+  &lt;properties&gt;
+    &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;
+  &lt;/properties&gt;
+
+  &lt;dependencies&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;junit&lt;/groupId&gt;
+      &lt;artifactId&gt;junit&lt;/artifactId&gt;
+      &lt;version&gt;3.8.1&lt;/version&gt;
+      &lt;scope&gt;test&lt;/scope&gt;
+    &lt;/dependency&gt;
+  &lt;/dependencies&gt;
+&lt;/project&gt;
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3"><span class="section-number-2">3</span> ビルドしてみよう</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+コマンドを実行して、成果物が作成されることを確認しましょう。
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">コマンド</th>
+<th scope="col" class="left">target配下の成果物</th>
+<th scope="col" class="left">説明　</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">mvn compile</td>
+<td class="left">classes/</td>
+<td class="left">classファイル</td>
+</tr>
+
+<tr>
+<td class="left">mvn test</td>
+<td class="left">test-classes/,surefire-reports/</td>
+<td class="left">classファイルとレポート</td>
+</tr>
+
+<tr>
+<td class="left">mvn package</td>
+<td class="left">hello-1.0-SNAPSHOT.jar</td>
+<td class="left">jarファイル</td>
+</tr>
+
+<tr>
+<td class="left">mvn install</td>
+<td class="left">-</td>
+<td class="left">.m2/repositoryに配置される</td>
+</tr>
+
+<tr>
+<td class="left">mvn site</td>
+<td class="left">site</td>
+<td class="left">レポート</td>
+</tr>
+
+<tr>
+<td class="left">mvn clean</td>
+<td class="left">-</td>
+<td class="left">targetが削除される</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+<div id="outline-container-sec-4" class="outline-2">
+<h2 id="sec-4"><span class="section-number-2">4</span> 暗黙の設定値を確認しよう</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+mavenのpom.xmlは多くのデフォルト設定値があります。
+また、他のpom.xmlから値を引き継ぐこともできます。
+</p>
+
+<p>
+今のpom.xmlがどういう状態であるか確認する場合、
+以下のコマンドが頼りになります。
+</p>
+</div>
+
+
+<div id="outline-container-sec-4-1" class="outline-3">
+<h3 id="sec-4-1"><span class="section-number-3">4.1</span> 完全な設定値を出力する</h3>
+<div class="outline-text-3" id="text-4-1">
+<p>
+settings.xmlやparentのpomを含めた設定値を出力します。
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">mvn help:effective-pom
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-4-2" class="outline-3">
+<h3 id="sec-4-2"><span class="section-number-3">4.2</span> 依存関係を出力する</h3>
+<div class="outline-text-3" id="text-4-2">
+<div class="org-src-container">
+
+<pre class="src src-sh">mvn dependency:tree
+</pre>
+</div>
+
+<pre class="example">
+[INFO] com.example:hello:jar:1.0-SNAPSHOT
+[INFO] \- junit:junit:jar:3.8.1:test
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-5" class="outline-2">
+<h2 id="sec-5"><span class="section-number-2">5</span> デフォルトのビルド設定を試してみよう。</h2>
+<div class="outline-text-2" id="text-5">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">pom.xmlの要素</th>
+<th scope="col" class="left">説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">&lt;sourceDirectory&gt;</td>
+<td class="left">ソース置き場</td>
+</tr>
+
+<tr>
+<td class="left">&lt;testSourceDirectory&gt;</td>
+<td class="left">テストソース置き場</td>
+</tr>
+
+<tr>
+<td class="left">&lt;outputDirectory&gt;</td>
+<td class="left">classファイル等の出力先ディレクトリ</td>
+</tr>
+
+<tr>
+<td class="left">&lt;testOutputDirectory&gt;</td>
+<td class="left">テストclassファイル等の出力先ディレクトリ</td>
+</tr>
+
+<tr>
+<td class="left">&lt;resources&gt;</td>
+<td class="left">リソース置き場</td>
+</tr>
+
+<tr>
+<td class="left">&lt;testResources&gt;</td>
+<td class="left">テストリソース置き場</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<div id="outline-container-sec-5-1" class="outline-3">
+<h3 id="sec-5-1"><span class="section-number-3">5.1</span> コンパイル設定</h3>
+<div class="outline-text-3" id="text-5-1">
+</div><div id="outline-container-sec-5-1-1" class="outline-4">
+<h4 id="sec-5-1-1"><span class="section-number-4">5.1.1</span> ソースを編集してみる。</h4>
+<div class="outline-text-4" id="text-5-1-1">
+<p>
+com.example.App
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-java">public static void main( String[] args )
+{
+    System.out.println( "Hello Maven!" );
+}
+</pre>
+</div>
+
+<p>
+テストを実行します。
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-bash">mvn test
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-5-2" class="outline-3">
+<h3 id="sec-5-2"><span class="section-number-3">5.2</span> テストコンパイル設定</h3>
+<div class="outline-text-3" id="text-5-2">
+<p>
+src/main配下のクラスで、junitのクラスを使ってみる。
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-java">public static void main( String[] args )
+{
+    junit.framework.TestCase.assertTrue(true);
+    System.out.println( "Hello World!" );
+}
+</pre>
+</div>
+
+<p>
+テストを実行します。
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-bash">mvn test
+</pre>
+</div>
+
+<pre class="example">
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.1:compile (default-compile) on project hello: Compilation failure
+[ERROR] /home/kawasaki/tmp/mvn_test/hello/src/main/java/com/example/App.java:[11,24] パッケージjunit.frameworkは存在しません
+</pre>
+
+<p>
+なぜコンパイルは失敗したのでしょうか？
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-5-3" class="outline-3">
+<h3 id="sec-5-3"><span class="section-number-3">5.3</span> リソースの配置</h3>
+<div class="outline-text-3" id="text-5-3">
+<p>
+hoge.txtを配置してコンパイルしてみよう。
+hoge.txtはコピーされる？理由は？
+</p>
+</div>
+
+<div id="outline-container-sec-5-3-1" class="outline-4">
+<h4 id="sec-5-3-1"><span class="section-number-4">5.3.1</span> src/main/java</h4>
+<div class="outline-text-4" id="text-5-3-1">
+<div class="org-src-container">
+
+<pre class="src src-sh">touch src/main/java/hoge.txt
+mvn clean compile
+ls target/classes
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-5-3-2" class="outline-4">
+<h4 id="sec-5-3-2"><span class="section-number-4">5.3.2</span> src/main/resources</h4>
+<div class="outline-text-4" id="text-5-3-2">
+<div class="org-src-container">
+
+<pre class="src src-sh">mv src/main/java/hoge.txt src/main/resources/
+mvn clean compile
+ls target/classes
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-6" class="outline-2">
+<h2 id="sec-6"><span class="section-number-2">6</span> 設定を変更してみよう</h2>
+<div class="outline-text-2" id="text-6">
+</div><div id="outline-container-sec-6-1" class="outline-3">
+<h3 id="sec-6-1"><span class="section-number-3">6.1</span> versionを変えてみる。</h3>
+<div class="outline-text-3" id="text-6-1">
+<div class="org-src-container">
+
+<pre class="src src-xml">&lt;groupId&gt;com.example&lt;/groupId&gt;
+&lt;artifactId&gt;hello&lt;/artifactId&gt;
+&lt;version&gt;1.0.0&lt;/version&gt;
+</pre>
+</div>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">mvn clean package
+ls target
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-6-2" class="outline-3">
+<h3 id="sec-6-2"><span class="section-number-3">6.2</span> dependencyを変えてみる。</h3>
+<div class="outline-text-3" id="text-6-2">
+</div><div id="outline-container-sec-6-2-1" class="outline-4">
+<h4 id="sec-6-2-1"><span class="section-number-4">6.2.1</span> JUnit4.12にしてみる</h4>
+<div class="outline-text-4" id="text-6-2-1">
+<p>
+<a href="http://search.maven.org/">http://search.maven.org/</a>
+で検索する。
+</p>
+
+<p>
+<a href="http://search.maven.org/#artifactdetails|junit|junit|4.12|jar">http://search.maven.org/#artifactdetails|junit|junit|4.12|jar</a>
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-xml">&lt;dependency&gt;
+    &lt;groupId&gt;junit&lt;/groupId&gt;
+    &lt;artifactId&gt;junit&lt;/artifactId&gt;
+    &lt;version&gt;4.12&lt;/version&gt;
+&lt;/dependency&gt;
+</pre>
+</div>
+
+<p>
+依存関係はどう変化しましたか？
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">mvn dependency:tree
+</pre>
+</div>
+
+<pre class="example">
+[INFO] com.example:hello:jar:1.0.0
+[INFO] \- junit:junit:jar:4.12:test
+[INFO]    \- org.hamcrest:hamcrest-core:jar:1.3:test
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+</pre>
+
+<p>
+org.hamcrest:hamcrest-coreというライブラリは、なぜ現れたのでしょうか？
+</p>
+</div>
+</div>
+
+
+
+<div id="outline-container-sec-6-2-2" class="outline-4">
+<h4 id="sec-6-2-2"><span class="section-number-4">6.2.2</span> 好きなライブラリを足してみよう</h4>
+<div class="outline-text-4" id="text-6-2-2">
+<div class="org-src-container">
+
+<pre class="src src-xml">&lt;dependency&gt;
+  &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+  &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;
+  &lt;version&gt;1.3.2.RELEASE&lt;/version&gt;
+&lt;/dependency&gt;
+</pre>
+</div>
+
+<p>
+依存関係はどう変化しましたか？
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">mvn dependency:tree
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: T.Kawasaki</p>
+<p class="date">Created: 2016-02-07 日 00:41</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

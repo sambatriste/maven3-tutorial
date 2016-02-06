@@ -1,6 +1,7 @@
 # -*- mode: org; coding: utf-8-unix -*-
 
-#+SETUPFILE: conf.org
+#+SETUPFILE: ../conf.org
+#+STARTUP: inlineimages
 #+TITLE: Eclipse
 
 
@@ -10,3 +11,6 @@
 File -> Import -> Existing Maven Project
 #+END_EXAMPLE
 
+#+CAPTION: This is the caption for the next figure link (or table)
+#+NAME:   fig:SED-HR4049
+[[file:import.png]]

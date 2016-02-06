@@ -1,6 +1,11 @@
 # -*- mode: org; coding: utf-8-unix -*-
+#+SETUPFILE: ./conf.org
+#+STARTUP: inlineimages
+#+TITLE: Maven3 チュートリアル
 
-* Mavenチュートリアル
+
+- [[./repository/repository.org][Mavenリポジトリ]]
+
 
 
 

@@ -1,6 +1,6 @@
 # -*- mode: org; coding: utf-8-unix -*-
 
-#+SETUPFILE: conf.org
+#+SETUPFILE: ../conf.org
 #+TITLE: Hello Maven
 
 
@@ -10,12 +10,22 @@
 シンプルなpom.xmlから学習するため、
 デフォルトのアーキタイプからプロジェクトを生成します。
 
+
 #+begin_src sh
-cd
-mdkir tmp
-cd tmp
+mdkir example
+cd example
 mvn archetype:generate
 #+end_src
+
+アーキタイプの種類を選べと言われます。
+
+#+BEGIN_EXAMPLE
+Choose a number or apply filter (format: [groupId:]artifactId, case sensitive contains): 705: 
+#+END_EXAMPLE
+
+そのままエンターキーを押し、デフォルトの705(maven-archetype-quickstart)を選択します。
+
+その他入力を求められますので以下のように入力します。
 
 | 要素       | 入力例　     |
 |------------+--------------|
@@ -33,6 +43,10 @@ cd hello
 cat pom.xml
 #+end_src
 
+** pom.xml
+
+#+INCLUDE: "../example/hello/pom.xml" src xml
+
 * ビルドしてみよう
 
 コマンドを実行して、成果物が作成されることを確認しましょう。
@@ -47,9 +61,14 @@ cat pom.xml
 | mvn clean   | -                               | targetが削除される         |
 
 
-
-
 * 暗黙の設定値を確認しよう
+
+mavenのpom.xmlは多くのデフォルト設定値があります。
+また、他のpom.xmlから値を引き継ぐこともできます。
+
+今のpom.xmlがどういう状態であるか確認する場合、
+以下のコマンドが頼りになります。
+
 
 ** 完全な設定値を出力する
 
@@ -171,7 +190,7 @@ ls target
 *** JUnit4.12にしてみる
 
 http://search.maven.org/
-でjunitで検索。
+で検索する。
 
 http://search.maven.org/#artifactdetails|junit|junit|4.12|jar
 
