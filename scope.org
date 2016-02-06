@@ -1,0 +1,41 @@
+# -*- mode: org; coding: utf-8-unix -*-
+
+#+SETUPFILE: conf.org
+
+* Mavenの<scope>
+
+** スコープの種類
+
+- compile
+- test
+- runtime
+- provided
+
+
+** クラスパスが現れる場面
+
+| シチュエーション             | mvnでの例        |
+|------------------------------+------------------|
+| コードをコンパイルする       | mvn compile      |
+| テストコードをコンパイルする | mvn test-compile |
+| アプリを実行する             | mvn jetty:run    |
+| テストを実行する             | mvn test         |
+
+** スコープとクラスパスの組み合わせ
+
+| scope    | javac (src/main) | javac (src/test) | java (src/main) | java (src/test) |
+|----------+------------------+------------------+-----------------+-----------------|
+| compile  | o                | o                | o               | o               |
+| test     | x                | o                | x               | o               |
+| runtime  | x                | x                | o               | o               |
+| provided | o                | o                | x               | x               |
+
+** テスト
+
+| ライブラリ      | 説明                       | 適切なスコープ |
+|-----------------+----------------------------+----------------|
+| junit.jar       | ユニットテスト用ライブラリ |                |
+| ojdbc6.jar      | JDBCドライバ               |                |
+| slf4j-api.jar   | ロギングライブラリ         |                |
+| servlet-api.jar | Servlet API                |                |
+|                 |                            |                |
