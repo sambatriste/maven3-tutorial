@@ -1,11 +1,10 @@
 # -*- mode: org; coding: utf-8-unix -*-
 
 #+SETUPFILE: ../conf.org
-#+STARTUP: inlineimages
 #+TITLE: Eclipse
 
 
-* MavenプロジェクトをEclipseに取り込んでみよう
+** MavenプロジェクトをEclipseに取り込んでみよう
 
 #+BEGIN_EXAMPLE
 File -> Import -> Existing Maven Project

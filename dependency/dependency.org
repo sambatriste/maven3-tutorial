@@ -1,0 +1,25 @@
+# -*- mode: org; coding: utf-8-unix -*-
+
+#+SETUPFILE: ../conf.org
+#+TITLE: 依存ライブラリ
+
+
+* アーティファクト
+
+mavenでは、あるmavenモジュールから作り出される成果物（典型的にはjarやwarファイル）を
+アーティファクト(artifact ≒ 成果物)と呼びます。
+
+* <dependency>の要素
+
+<dependecy>には依存するアーティファクトの情報を記載します。
+
+| 要素       | 説明                                                             | 例                  |
+|------------+------------------------------------------------------------------+---------------------|
+| groupId    | グループ一意に特定するID                                         | org.springframework |
+| artifactId | グループ内で成果物を一意に特定するID                             | spring-webmvc       |
+| version    | バージョン                                                       | 4.2.4.RELEASE       |
+| scope      | その依存ライブラリをどの場面で使用するか([[./scope.html][後述]]) | compile             |
+
+
+* versionの考え方
+

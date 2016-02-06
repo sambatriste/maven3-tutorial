@@ -1,11 +1,10 @@
 # -*- mode: org; coding: utf-8-unix -*-
 
 #+SETUPFILE: ../conf.org
-#+STARTUP: inlineimages
 #+TITLE: Mavenリポジトリ
 
 
-* リポジトリの種類
+** リポジトリの種類
 
 
 | 種類                   | 説明                                                             | 主な用途                          |
@@ -28,7 +27,7 @@ inhouse ..> remote
 [[file:./repositories.png]]
 
 
-* ローカルリポジトリ
+** ローカルリポジトリ
 
 - ファイルシステム上のキャッシュ(~/.m2/repository)。
 - mavenで使用するライブラリは必ずここにキャッシュされる。
@@ -50,15 +49,46 @@ dev <-- mvn : build success
 [[file:./retrieve-local-cache.png]]
 
 
-* インハウスリポジトリ
+** インハウスリポジトリ
 
-** PJのライブラリをデプロイ・取得する
+*** PJのライブラリをデプロイ・取得する
+
+インハウスリポジトリを仲介して、ライブラリの配布を行うことができます。
+
+#+BEGIN_SRC plantuml :file retrieve-pj-lib.png :cmdline -charset UTF-8
+hide footbox
+
+actor "PJライブラリ開発者" as lib_dev
+participant mvn as mvn_lib_dev
+participant "ローカル\nリポジトリ" as local_lib
+participant "インハウス\nリポジトリ" as inhouse
+participant "ローカル\nリポジトリ" as local_dev
+participant mvn as mvn_dev
+actor "開発者" as dev
+
+lib_dev -> mvn_lib_dev : mvn deploy
+mvn_lib_dev -> mvn_lib_dev :  mvn install
+mvn_lib_dev -> local_lib :  jar配置
+mvn_lib_dev -> inhouse : PUT pj-lib.jar
+mvn_lib_dev <-- inhouse : 200 OK
+lib_dev <-- mvn_lib_dev : Build Success
+
+dev -> mvn_dev : mvn compile
+mvn_dev -> local_dev : jar取得
+mvn_dev <-- local_dev : なし
+mvn_dev -> inhouse : GET pj-lib.jar
+mvn_dev <-- inhouse : 200 OK
+dev <-- mvn_dev : Build Success 
+
+#+END_SRC
 
 #+RESULTS:
 [[file:retrieve-pj-lib.png]]
 
 
-** リモートリポジトリのファイルを取得する
+*** リモートリポジトリのファイルを取得する
+
+インハウスリポジトリは、リモートリポジトリへのプロキシ、キャッシュを兼ねることが多いです。
 
 #+BEGIN_SRC plantuml :file retrieve-remote.png :cmdline -charset UTF-8
 hide footbox
@@ -81,12 +111,26 @@ dev <-- inhouse : ダウンロード
 #+RESULTS:
 [[file:retrieve-remote.png]]
 
-* リモートリポジトリ
+インハウスリポジトリにキャッシュされている場合、リモートリポジトリへのアクセスは発生しません。
 
-デフォルトでは[[http://repo1.maven.org/maven2/][Maven Central]]が有効なリモートリポジトリとして設定されている。
+** リモートリポジトリ
+
+デフォルトでは[[https://repo.maven.apache.org/maven2][Maven Central]]が有効なリモートリポジトリとして設定されている。
 
 
 #+begin_src sh
 mvn help:effective-pom
 #+end_src
 
+#+BEGIN_SRC xml
+  <repositories>
+    <repository>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+      <id>central</id>
+      <name>Central Repository</name>
+      <url>https://repo.maven.apache.org/maven2</url>
+    </repository>
+  </repositories>
+#+END_SRC

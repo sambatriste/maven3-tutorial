@@ -1,10 +1,18 @@
 # -*- mode: org; coding: utf-8-unix -*-
 #+SETUPFILE: ./conf.org
-#+STARTUP: inlineimages
 #+TITLE: Maven3 チュートリアル
 
+# - [[./hello_maven/hello_maven.html][Hello Maven]]
+# - [[./eclipse/eclipse.html][Eclipse]]
+# - [[./repository/repository.html][Mavenリポジトリ]]
 
-- [[./repository/repository.org][Mavenリポジトリ]]
+
+#+INCLUDE: hello_maven/hello_maven.org
+
+
+#+INCLUDE: eclipse/eclipse.org
+
+#+INCLUDE: repository/repository.org
 
 
 
