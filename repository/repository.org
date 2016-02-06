@@ -1,6 +1,6 @@
 # -*- mode: org; coding: utf-8-unix -*-
 
-#+SETUPFILE: conf.org
+#+SETUPFILE: ../conf.org
 #+STARTUP: inlineimages
 #+TITLE: Mavenリポジトリ
 
@@ -14,13 +14,6 @@
 | インハウスリポジトリ　 | PJ内で構築したリポジトリ                                         | PJ成果物(jar等)をPJ向けに公開する |
 | リモートリポジトリ     | インターネット上に公開されたリポジトリ(Maven Central, jcenter等) | ライブラリを公開する              |
 
-#+BEGIN_SRC plantuml :file repositries.png :cmdline -charset UTF-8
-[ローカルリポジトリ] as local
-[インハウスリポジトリ] as inhouse
-[リモートリポジトリ] as remote
-local .> inhouse : 取得
-inhouse .> remote : 取得
-#+END_SRC
 #+RESULTS:
 [[file:repositries.png]]
 
@@ -29,19 +22,6 @@ inhouse .> remote : 取得
 - ファイルシステム上のキャッシュ(~/.m2/repository)。
 - mavenで使用するライブラリは必ずここにキャッシュされる。
 
-#+BEGIN_SRC plantuml :file retrieve-local-cache.png :cmdline -charset UTF-8
-hide footbox
-
-actor "開発者" as dev
-participant "mvn" as mvn
-participant "ローカルリポジトリ" as local
-
-
-dev -> mvn : mvn compile
-mvn -> local : jarを参照
-dev <-- mvn : build success
-
-#+END_SRC
 #+RESULTS:
 [[file:retrieve-local-cache.png]]
 
@@ -50,26 +30,6 @@ dev <-- mvn : build success
 
 ** PJのライブラリをデプロイ・取得する
 
-#+BEGIN_SRC plantuml :file retrieve-pj-lib.png :cmdline -charset UTF-8
-hide footbox
-
-actor "共通ライブラリ開発者" as common_dev
-participant "mvn" as mvn_common
-participant "インハウスリポジトリ" as inhouse
-participant "mvn" as mvn_dev
-actor "開発者" as dev
-
-common_dev -> mvn_common : mvn deploy
-mvn_common -> inhouse : PUT pj-.jar
-mvn_common <-- inhouse : 200 OK
-common_dev <-- mvn_common : build success
-
-dev -> mvn_dev : mvn compile
-mvn_dev -> inhouse : GET pj-lib.jar
-mvn_dev <-- inhouse : ダウンロード
-dev <-- mvn_dev : build success
-
-#+END_SRC
 #+RESULTS:
 [[file:retrieve-pj-lib.png]]
 
