@@ -24,7 +24,7 @@ inhouse ..> remote
 #+END_SRC
 
 #+RESULTS:
-[[rsc:./repositories.png]]
+[[file:resources/repositories.png]]
 
 
 ** ローカルリポジトリ
@@ -46,7 +46,7 @@ dev <-- mvn : build success
 #+END_SRC
 
 #+RESULTS:
-[[rsc:./retrieve-local-cache.png]]
+[[file:resources/retrieve-local-cache.png]]
 
 
 ** インハウスリポジトリ
@@ -83,7 +83,7 @@ dev <-- mvn_dev : Build Success
 #+END_SRC
 
 #+RESULTS:
-[[rsc:retrieve-pj-lib.png]]
+[[file:resources/retrieve-pj-lib.png]]
 
 
 *** リモートリポジトリのファイルを取得する
@@ -109,7 +109,7 @@ dev <-- inhouse : ダウンロード
 
 #+END_SRC
 #+RESULTS:
-[[rsc:retrieve-remote.png]]
+[[file:resources/retrieve-remote.png]]
 
 インハウスリポジトリにキャッシュされている場合、リモートリポジトリへのアクセスは発生しません。
 

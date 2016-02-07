@@ -11,7 +11,7 @@ File -> Import -> Existing Maven Project
 #+END_EXAMPLE
 
 
-[[rsc:eclipse-import.png]]
+[[file:resources/eclipse-import.png]]
 
 ** Mavenの設定がどうEclipseに取り込まれているか
 
@@ -22,7 +22,7 @@ File -> Import -> Existing Maven Project
 - 依存ライブラリが追加されている(junit, hamcrest)
 
 
-[[rsc:eclipse-explorer.png]]
+[[file:resources/eclipse-explorer.png]]
 
 
 
@@ -34,14 +34,14 @@ File -> Import -> Existing Maven Project
 | src/test/java  | target/test-classes |
 
 
-[[rsc:eclipse-build-path-source.png]]
+[[file:resources/eclipse-build-path-source.png]]
 
 
 *** Project Properties (Libraries)
 
 - 依存ライブラリJunitが、Mavenローカルリポジトリのjarを参照している
 
-[[rsc:eclipse-build-path-libraries.png]]
+[[file:resources/eclipse-build-path-libraries.png]]
 
 
 
@@ -49,5 +49,5 @@ File -> Import -> Existing Maven Project
 
 - Text file encoding が UTF-8 に設定されている
 
-[[rsc:eclipse-resource.png]]
+[[file:resources/eclipse-resource.png]]
 
