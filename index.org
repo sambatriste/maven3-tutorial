@@ -25,16 +25,24 @@
 
 #+INCLUDE: repository.org
 
-* プロパティ
+* TODO プロパティ
 
-* フェーズとゴール
+#+INCLUDE: properties.org
 
-* プラグイン
+* TODO フェーズとゴール
 
-* pomの継承
+#+INCLUDE: phase_and_goal.org
 
-* マルチモジュール構成
+* TODO プラグイン
 
+#+INCLUDE: plugin.org
 
+* TODO pomの継承
+
+#+INCLUDE: parent_pom.org
+
+* TODO マルチモジュール構成
+
+#+INCLUDE: multi_module.org
 
 

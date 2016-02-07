@@ -1,5 +1,5 @@
 #!/bin/bash
-ORG_FILES=*/*.org
+ORG_FILES=*.org
 for org_file in $ORG_FILES
 do
     echo "Processing ${org_file} file..."

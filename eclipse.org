@@ -51,3 +51,4 @@ File -> Import -> Existing Maven Project
 
 [[file:resources/eclipse-resource.png]]
 
+** TODO pom.xmlが変更された場合
