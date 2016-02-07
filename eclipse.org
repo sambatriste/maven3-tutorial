@@ -11,35 +11,43 @@ File -> Import -> Existing Maven Project
 #+END_EXAMPLE
 
 
-[[file:eclipse-import.png]]
+[[rsc:eclipse-import.png]]
 
 ** Mavenの設定がどうEclipseに取り込まれているか
 
 ***  Package Exploere
-
-[[file:eclipse-explorer.png]]
 
 - src/main/javaがソースフォルダとして認識されている
 - src/test/javaがソースフォルダとして認識されている
 - 依存ライブラリが追加されている(junit, hamcrest)
 
 
-*** Project Properties (Source)
+[[rsc:eclipse-explorer.png]]
 
-[[file:eclipse-build-path-source.png]]
+
+
+*** Project Properties (Source)
 
 | ソースフォルダ | 出力先              |
 |----------------+---------------------|
 | src/main/java  | target/classes      |
 | src/test/java  | target/test-classes |
 
-*** Project Properties (Libraries)
 
-[[file:eclipse-build-path-libraries.png]]
+[[rsc:eclipse-build-path-source.png]]
+
+
+*** Project Properties (Libraries)
 
 - 依存ライブラリJunitが、Mavenローカルリポジトリのjarを参照している
 
+[[rsc:eclipse-build-path-libraries.png]]
+
+
+
 *** Project Properties (Resource)
 
-[[file:eclipse-resource.png]]
+- Text file encoding が UTF-8 に設定されている
+
+[[rsc:eclipse-resource.png]]
 

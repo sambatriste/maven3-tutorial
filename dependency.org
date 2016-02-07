@@ -18,24 +18,24 @@ mavenでは、あるmavenモジュールから作り出される成果物（典�
 
 *** JUnitの例
 
-[[file:./junit_deps.png]]
+[[rsc:./junit_deps.png]]
 
 JUnitはtestスコープで使用しているので、
 hamcrestもtestスコープとなる。
 
 *** Logbackの例
 
-[[file:./logback_deps.png]]
+[[rsc:./logback_deps.png]]
  
 ** <dependency>の要素
 
 <dependecy>には依存するアーティファクトの情報を記載します。
 
-| 要素       | 説明                                                             | 例                  |
-|------------+------------------------------------------------------------------+---------------------|
-| groupId    | グループ一意に特定するID                                         | org.springframework |
-| artifactId | グループ内で成果物を一意に特定するID                             | spring-webmvc       |
-| version    | バージョン                                                       | 4.2.4.RELEASE       |
+| 要素       | 説明                                           | 例                  |
+|------------+------------------------------------------------+---------------------|
+| groupId    | グループ一意に特定するID                       | org.springframework |
+| artifactId | グループ内で成果物を一意に特定するID           | spring-webmvc       |
+| version    | バージョン                                     | 4.2.4.RELEASE       |
 | scope      | その依存ライブラリをどの場面で使用するか([[./scope.html][後述]]) | compile             |
 
 
