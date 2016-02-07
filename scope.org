@@ -1,7 +1,7 @@
 # -*- mode: org; coding: utf-8-unix -*-
 
 #+SETUPFILE: ./conf.org
-#+TITLE:  Mavenの<scope>
+
 
 ** スコープの種類
 
