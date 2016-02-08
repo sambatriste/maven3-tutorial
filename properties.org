@@ -1,2 +1,51 @@
 # -*- mode: org; coding: utf-8-unix -*-
 #+SETUPFILE: ./conf.org
+
+** Mavenプロジェクトプロパティ
+
+Mavenがデフォルトで用意しているプロパティがあります。
+
+| プロパティ名                      | デフォルト値        |
+|-----------------------------------+---------------------|
+| project.build.directory           | target              |
+| project.build.outputDirectory     | target/classes      |
+| project.build.testOutputDirectory | target/test-classes |
+| project.compileSourceRoots        | src/main/java       |
+| project.testCompileSourceRoots    | src/test/java       |
+
+プロパティにどんな値が設定されているか表示してみよう。
+
+#+BEGIN_SRC sh
+cd example/maven_props
+mvn antrun:run
+#+END_SRC
+
+
+*** 以下のプロパティを表示してみよう
+
+- project.basedir
+- project.name
+- project.version
+- project.build.finalName
+- project.artifactId
+
+
+** 環境変数
+
+env.<環境変数名>で任意の環境変数を取得できます。
+
+例：JAVA_HOMEの場合
+
+#+BEGIN_EXAMPLE
+env.JAVA_HOME
+#+END_EXAMPLE
+
+*** 環境変数PATHを表示させてみよう
+
+#+BEGIN_SRC sh
+vi example/maven_props/pom.xml
+mvn antrun:run
+#+END_SRC
+
+
+** TODO ユーザ定義変数

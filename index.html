@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2016-02-08 月 12:55 -->
+<!-- 2016-02-08 月 14:02 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="viewport" content="width=device-width, initial-scale=1" />
 <title>Maven3 チュートリアル</title>
@@ -300,11 +300,26 @@ for the JavaScript code in this tag.
 <li><a href="#orgheadline49">5.4. リモートリポジトリ</a></li>
 </ul>
 </li>
-<li><a href="#orgheadline51">6. <span class="todo nilTODO">TODO</span> プロパティ</a></li>
-<li><a href="#orgheadline52">7. <span class="todo nilTODO">TODO</span> フェーズとゴール</a></li>
-<li><a href="#orgheadline53">8. <span class="todo nilTODO">TODO</span> プラグイン</a></li>
-<li><a href="#orgheadline54">9. <span class="todo nilTODO">TODO</span> pomの継承</a></li>
-<li><a href="#orgheadline55">10. <span class="todo nilTODO">TODO</span> マルチモジュール構成</a></li>
+<li><a href="#orgheadline57">6. プロパティ</a>
+<ul>
+<li><a href="#orgheadline52">6.1. Mavenプロジェクトプロパティ</a>
+<ul>
+<li><a href="#orgheadline51">6.1.1. 以下のプロパティを表示してみよう</a></li>
+</ul>
+</li>
+<li><a href="#orgheadline55">6.2. 環境変数</a>
+<ul>
+<li><a href="#orgheadline53">6.2.1. 例：JAVA<sub>HOMEの場合</sub></a></li>
+<li><a href="#orgheadline54">6.2.2. 環境変数PATHを表示させてみよう</a></li>
+</ul>
+</li>
+<li><a href="#orgheadline56">6.3. <span class="todo nilTODO">TODO</span> ユーザ定義変数</a></li>
+</ul>
+</li>
+<li><a href="#orgheadline58">7. <span class="todo nilTODO">TODO</span> フェーズとゴール</a></li>
+<li><a href="#orgheadline59">8. <span class="todo nilTODO">TODO</span> プラグイン</a></li>
+<li><a href="#orgheadline60">9. <span class="todo nilTODO">TODO</span> pomの継承</a></li>
+<li><a href="#orgheadline61">10. <span class="todo nilTODO">TODO</span> マルチモジュール構成</a></li>
 </ul>
 </div>
 </div>
@@ -328,8 +343,7 @@ for the JavaScript code in this tag.
 
 <div class="org-src-container">
 
-<pre class="src src-sh">mdkir example
-cd example
+<pre class="src src-sh">cd example
 mvn archetype:generate
 </pre>
 </div>
@@ -347,7 +361,7 @@ Choose a number or apply filter (format: [groupId:]artifactId, case sensitive co
 </p>
 
 <p>
-その他入力を求められますので以下のように入力します。
+その他入力を求められますので以下のように入力します（デフォルト値）。
 </p>
 
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
@@ -426,7 +440,6 @@ cat pom.xml
   &lt;/properties&gt;
 
   &lt;dependencies&gt;
-
     &lt;dependency&gt;
       &lt;groupId&gt;junit&lt;/groupId&gt;
       &lt;artifactId&gt;junit&lt;/artifactId&gt;
@@ -440,6 +453,7 @@ cat pom.xml
 </div>
 </div>
 </div>
+
 
 <div id="outline-container-orgheadline4" class="outline-3">
 <h3 id="orgheadline4"><span class="section-number-3">1.3</span> ビルドしてみよう</h3>
@@ -962,7 +976,7 @@ svnを使用しているとします。
 <div class="outline-text-4" id="text-2-4-3">
 <p>
 SNAPSHOTバージョンを使用すると、最新のライブラリがダウンロードされるので、
-「<a href="#orgheadline26">2.4.1</a>」と同じ事象が発生します。
+<a href="#orgheadline26">バージョン管理システムで共有する場合</a>と同じ事象が発生します。
 明示的にバージョン番号を変更することで、任意のタイミングでライブラリを
 リリース／取り込みできます。
 </p>
@@ -1029,7 +1043,8 @@ SNAPSHOTバージョンを使用すると、最新のライブラリがダウン
 <h4 id="orgheadline31"><span class="section-number-4">3.1.1</span> クラスパスが現れる場面</h4>
 <div class="outline-text-4" id="text-3-1-1">
 <p>
-そもそもクラスパスが、どのような場面で現れるかおさらいしましょう。
+そもそも、クラスパスというものが、どのような場面で現れるのか
+おさらいしましょう。
 </p>
 
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
@@ -1172,7 +1187,7 @@ SNAPSHOTバージョンを使用すると、最新のライブラリがダウン
 <th scope="col" class="org-left">ライブラリ</th>
 <th scope="col" class="org-left">説明</th>
 <th scope="col" class="org-left">適切なスコープ</th>
-<th scope="col" class="org-left">理由</th>
+<th scope="col" class="org-left">そのスコープにした理由</th>
 </tr>
 </thead>
 <tbody>
@@ -1185,7 +1200,7 @@ SNAPSHOTバージョンを使用すると、最新のライブラリがダウン
 
 <tr>
 <td class="org-left">ojdbc6.jar</td>
-<td class="org-left">JDBCドライバ</td>
+<td class="org-left">Oracle JDBCドライバ</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
 </tr>
@@ -1480,38 +1495,150 @@ File -&gt; Import -&gt; Existing Maven Project
 </div>
 </div>
 
-<div id="outline-container-orgheadline51" class="outline-2">
-<h2 id="orgheadline51"><span class="section-number-2">6</span> <span class="todo TODO">TODO</span> プロパティ</h2>
+<div id="outline-container-orgheadline57" class="outline-2">
+<h2 id="orgheadline57"><span class="section-number-2">6</span> プロパティ</h2>
 <div class="outline-text-2" id="text-6">
+</div>
+
+<div id="outline-container-orgheadline52" class="outline-3">
+<h3 id="orgheadline52"><span class="section-number-3">6.1</span> Mavenプロジェクトプロパティ</h3>
+<div class="outline-text-3" id="text-6-1">
+<p>
+Mavenがデフォルトで用意しているプロパティがあります。
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">プロパティ名</th>
+<th scope="col" class="org-left">デフォルト値</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">project.build.directory</td>
+<td class="org-left">target</td>
+</tr>
+
+<tr>
+<td class="org-left">project.build.outputDirectory</td>
+<td class="org-left">target/classes</td>
+</tr>
+
+<tr>
+<td class="org-left">project.build.testOutputDirectory</td>
+<td class="org-left">target/test-classes</td>
+</tr>
+
+<tr>
+<td class="org-left">project.compileSourceRoots</td>
+<td class="org-left">src/main/java</td>
+</tr>
+
+<tr>
+<td class="org-left">project.testCompileSourceRoots</td>
+<td class="org-left">src/test/java</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+プロパティにどんな値が設定されているか表示してみよう。
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">cd example/maven_props
+mvn antrun:run
+</pre>
 </div>
 </div>
 
-<div id="outline-container-orgheadline52" class="outline-2">
-<h2 id="orgheadline52"><span class="section-number-2">7</span> <span class="todo TODO">TODO</span> フェーズとゴール</h2>
+
+<div id="outline-container-orgheadline51" class="outline-4">
+<h4 id="orgheadline51"><span class="section-number-4">6.1.1</span> 以下のプロパティを表示してみよう</h4>
+<div class="outline-text-4" id="text-6-1-1">
+<ul class="org-ul">
+<li>project.basedir</li>
+<li>project.name</li>
+<li>project.version</li>
+<li>project.build.finalName</li>
+<li>project.artifactId</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orgheadline55" class="outline-3">
+<h3 id="orgheadline55"><span class="section-number-3">6.2</span> 環境変数</h3>
+<div class="outline-text-3" id="text-6-2">
+<p>
+env.&lt;環境変数名&gt;で任意の環境変数を取得できます。
+</p>
+</div>
+
+<div id="outline-container-orgheadline53" class="outline-4">
+<h4 id="orgheadline53"><span class="section-number-4">6.2.1</span> 例：JAVA<sub>HOMEの場合</sub></h4>
+<div class="outline-text-4" id="text-6-2-1">
+<pre class="example">
+env.JAVA_HOME
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgheadline54" class="outline-4">
+<h4 id="orgheadline54"><span class="section-number-4">6.2.2</span> 環境変数PATHを表示させてみよう</h4>
+<div class="outline-text-4" id="text-6-2-2">
+<div class="org-src-container">
+
+<pre class="src src-sh">vi example/maven_props/pom.xml
+mvn antrun:run
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orgheadline56" class="outline-3">
+<h3 id="orgheadline56"><span class="section-number-3">6.3</span> <span class="todo TODO">TODO</span> ユーザ定義変数</h3>
+</div>
+</div>
+
+<div id="outline-container-orgheadline58" class="outline-2">
+<h2 id="orgheadline58"><span class="section-number-2">7</span> <span class="todo TODO">TODO</span> フェーズとゴール</h2>
 <div class="outline-text-2" id="text-7">
 </div>
 </div>
 
-<div id="outline-container-orgheadline53" class="outline-2">
-<h2 id="orgheadline53"><span class="section-number-2">8</span> <span class="todo TODO">TODO</span> プラグイン</h2>
+<div id="outline-container-orgheadline59" class="outline-2">
+<h2 id="orgheadline59"><span class="section-number-2">8</span> <span class="todo TODO">TODO</span> プラグイン</h2>
 <div class="outline-text-2" id="text-8">
 </div>
 </div>
 
-<div id="outline-container-orgheadline54" class="outline-2">
-<h2 id="orgheadline54"><span class="section-number-2">9</span> <span class="todo TODO">TODO</span> pomの継承</h2>
+<div id="outline-container-orgheadline60" class="outline-2">
+<h2 id="orgheadline60"><span class="section-number-2">9</span> <span class="todo TODO">TODO</span> pomの継承</h2>
 <div class="outline-text-2" id="text-9">
 </div>
 </div>
 
-<div id="outline-container-orgheadline55" class="outline-2">
-<h2 id="orgheadline55"><span class="section-number-2">10</span> <span class="todo TODO">TODO</span> マルチモジュール構成</h2>
+<div id="outline-container-orgheadline61" class="outline-2">
+<h2 id="orgheadline61"><span class="section-number-2">10</span> <span class="todo TODO">TODO</span> マルチモジュール構成</h2>
 <div class="outline-text-2" id="text-10">
 </div>
 </div>
 </div>
 <div id="postamble" class="status">
-<p class="date">Created: 2016-02-08 月 12:55</p>
+<p class="date">Created: 2016-02-08 月 14:02</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

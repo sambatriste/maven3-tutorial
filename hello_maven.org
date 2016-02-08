@@ -10,7 +10,6 @@
 
 
 #+begin_src sh
-mdkir example
 cd example
 mvn archetype:generate
 #+end_src
@@ -23,7 +22,7 @@ Choose a number or apply filter (format: [groupId:]artifactId, case sensitive co
 
 そのままエンターキーを押し、デフォルトの705(maven-archetype-quickstart)を選択します。
 
-その他入力を求められますので以下のように入力します。
+その他入力を求められますので以下のように入力します（デフォルト値）。
 
 | 要素       | 入力例　     |
 |------------+--------------|
@@ -43,7 +42,34 @@ cat pom.xml
 
 *** pom.xml
 
-#+INCLUDE: "example/hello/pom.xml" src xml
+#+BEGIN_SRC xml
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.example</groupId>
+  <artifactId>hello</artifactId>
+  <version>1.0.0</version>
+  <packaging>jar</packaging>
+
+  <name>hello</name>
+  <url>http://maven.apache.org</url>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.12</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+</project>
+#+END_SRC
+
 
 ** ビルドしてみよう
 
