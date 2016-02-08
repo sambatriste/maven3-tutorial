@@ -3,7 +3,7 @@
 #+SETUPFILE: ./conf.org
 
 
-** archetypeからプロジェクト作成してみよう
+** TODO archetypeからプロジェクト作成してみよう
 
 シンプルなpom.xmlから学習するため、
 デフォルトのアーキタイプからプロジェクトを生成します。
@@ -31,13 +31,13 @@ Choose a number or apply filter (format: [groupId:]artifactId, case sensitive co
 | version    | 1.0-SNAPSHOT |
 | package    | com.example  |
 
-** pom.xmlを見てみよう
+** TODO pom.xmlを見てみよう
 
 作成されたpom.xmlを眺めてみます。
 
 #+begin_src sh
 cd hello
-cat pom.xml
+more pom.xml
 #+end_src
 
 *** pom.xml
@@ -71,7 +71,7 @@ cat pom.xml
 #+END_SRC
 
 
-** ビルドしてみよう
+** TODO ビルドしてみよう
 
 コマンドを実行して、成果物が作成されることを確認しましょう。
 
@@ -94,7 +94,7 @@ mavenのpom.xmlは多くのデフォルト設定値があります。
 以下のコマンドが頼りになります。
 
 
-*** 完全な設定値を出力する
+*** TODO 完全な設定値を出力する
 
 settings.xmlやparentのpomを含めた設定値を出力します。
 
@@ -102,7 +102,7 @@ settings.xmlやparentのpomを含めた設定値を出力します。
 mvn help:effective-pom
 #+end_src
 
-*** 依存関係を出力する
+*** TODO 依存関係を出力する
 
 #+begin_src sh
 mvn dependency:tree
@@ -127,9 +127,9 @@ mvn dependency:tree
 | <resources>           | リソース置き場                            |
 | <testResources>       | テストリソース置き場                      |
 
-*** コンパイル設定
+*** TODO コンパイル設定
 
-**** ソースを編集してみる。
+ソースを編集してみる。
 
 com.example.App
 
@@ -147,7 +147,7 @@ mvn test
 #+end_src
 
 
-*** テストコンパイル設定
+*** TODO テストコンパイル設定
 
 src/main配下のクラスで、junitのクラスを使ってみる。
 
@@ -172,7 +172,7 @@ mvn test
 
 なぜコンパイルは失敗したのでしょうか？
 
-*** リソースの配置
+*** TODO リソースの配置
 
 hoge.txtを配置してコンパイルしてみよう。
 hoge.txtはコピーされる？理由は？
@@ -196,7 +196,7 @@ ls target/classes
 
 ** 設定を変更してみよう
 
-*** versionを変えてみる。
+*** TODO versionを変えてみる。
 
 #+begin_src xml
   <groupId>com.example</groupId>
@@ -209,7 +209,7 @@ mvn clean package
 ls target
 #+end_src
 
-*** dependencyを変えてみる。
+*** TODO dependencyを変えてみる。
 
 **** JUnit4.12にしてみる
 
@@ -245,7 +245,7 @@ org.hamcrest:hamcrest-coreというライブラリは、なぜ現れたのでし
 
 
 
-**** 好きなライブラリを足してみよう
+**** TODO 好きなライブラリを足してみよう
 
 #+begin_src xml
 <dependency>

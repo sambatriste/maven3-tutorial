@@ -5,6 +5,11 @@
   <groupId>com.example</groupId>
   <artifactId>maven_props</artifactId>
   <version>1.0.0</version>
+
+  <!-- ここにプロパティを設定できます。-->
+  <properties>
+    <my.prop>MY PROPERTY</my.prop>
+  </properties>
   
   <build>
     <plugins>
@@ -23,6 +28,7 @@
                 <echo message="project.build.testOutputDirectory=${project.build.testOutputDirectory}"/>
                 <echo message="project.compileSourceRoots=${project.compileSourceRoots}"/>
                 <echo message="project.testCompileSourceRoots=${project.testCompileSourceRoots}"/>
+                <echo message="my.prop=${my.prop}"/>
               </tasks>
             </configuration>
           </execution>

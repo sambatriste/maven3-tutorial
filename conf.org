@@ -14,4 +14,4 @@
 
 #+STARTUP: content
 #+STARTUP: indent
-
+#+OPTIONS: ^:{}

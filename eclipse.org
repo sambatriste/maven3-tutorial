@@ -2,9 +2,7 @@
 
 #+SETUPFILE: ./conf.org
 
-
-
-** MavenプロジェクトをEclipseに取り込んでみよう
+** TODO MavenプロジェクトをEclipseに取り込んでみよう
 
 #+BEGIN_EXAMPLE
 File -> Import -> Existing Maven Project
@@ -15,7 +13,9 @@ File -> Import -> Existing Maven Project
 
 ** Mavenの設定がどうEclipseに取り込まれているか
 
-***  Package Exploere
+Eclipseの設定を確認してみよう。
+
+*** TODO Package Exploere
 
 - src/main/javaがソースフォルダとして認識されている
 - src/test/javaがソースフォルダとして認識されている
@@ -26,7 +26,7 @@ File -> Import -> Existing Maven Project
 
 
 
-*** Project Properties (Source)
+*** TODO Project Properties (Source)
 
 | ソースフォルダ | 出力先              |
 |----------------+---------------------|
@@ -37,7 +37,7 @@ File -> Import -> Existing Maven Project
 [[file:resources/eclipse-build-path-source.png]]
 
 
-*** Project Properties (Libraries)
+*** TODO Project Properties (Libraries)
 
 - 依存ライブラリJunitが、Mavenローカルリポジトリのjarを参照している
 
@@ -45,10 +45,34 @@ File -> Import -> Existing Maven Project
 
 
 
-*** Project Properties (Resource)
+*** TODO Project Properties (Resource)
 
 - Text file encoding が UTF-8 に設定されている
 
 [[file:resources/eclipse-resource.png]]
 
-** TODO pom.xmlが変更された場合
+** pom.xmlが変更された場合
+
+pom.xmlが変更された場合、設定変更をEclipseに教えてあげる必要があります。
+
+#+BEGIN_EXAMPLE
+Maven -> Update Project...
+#+END_EXAMPLE
+
+*** TODO pom.xmlの変更を取り込んでみよう
+
+pom.xmlを編集して、Eclipse上でUpdate Projectを実行してみましょう。
+
+依存ライブラリを追加します。
+
+#+BEGIN_SRC xml
+<dependency>
+    <groupId>commons-beanutils</groupId>
+    <artifactId>commons-beanutils</artifactId>
+    <version>1.9.2</version>
+</dependency>
+#+END_SRC
+
+Update Projectを実行し、設定がどう変更したか確認します。
+
+

@@ -41,7 +41,7 @@
 | runtime  | x                | x                | o                     | o                          |
 | provided | o                | o                | x                     | x                          |
 
-** 小テスト
+** TODO 小テスト
 
 適切なスコープとその理由を考えてみよう。
 

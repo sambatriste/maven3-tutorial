@@ -1,6 +1,14 @@
 # -*- mode: org; coding: utf-8-unix -*-
 #+SETUPFILE: ./conf.org
 
+** プロパティ
+
+pom.xml内で、
+#+BEGIN_EXAMPLE
+${プロパティ名}
+#+END_EXAMPLE
+のように記述することで、指定したプロパティの値が展開されます。
+
 ** Mavenプロジェクトプロパティ
 
 Mavenがデフォルトで用意しているプロパティがあります。
@@ -17,11 +25,14 @@ Mavenがデフォルトで用意しているプロパティがあります。
 
 #+BEGIN_SRC sh
 cd example/maven_props
+more pom.xml
 mvn antrun:run
 #+END_SRC
 
 
-*** 以下のプロパティを表示してみよう
+*** その他のプロパティを表示してみよう
+
+以下のプロパティを表示して、どのような値が設定されているか見てみよう。
 
 - project.basedir
 - project.name
@@ -48,4 +59,46 @@ mvn antrun:run
 #+END_SRC
 
 
-** TODO ユーザ定義変数
+** TODO ユーザ定義プロパティ
+
+<properties>内に、以下のようにして任意のプロパティを設定できます。
+
+#+BEGIN_EXAMPLE
+<プロパティ名>プロパティ値</プロパティ名>
+#+END_EXAMPLE
+
+#+BEGIN_SRC xml
+<project>
+  :
+  <properties>
+    <my.prop>MY PROPERTY</my.prop>
+  </properties>
+  :
+</project>
+#+END_SRC
+
+*** 使用例
+
+**** ライブラリのバージョン番号
+
+#+BEGIN_SRC xml
+<dependency> 
+  <groupId>junit</groupId>
+  <artifactId>junit</artifactId>
+  <version>${junit.version}</version>
+</dependecy>
+#+END_SRC
+
+**** ファイルパス
+
+#+BEGIN_SRC xml
+<properties>
+  <hoge.home>path/to/hoge</hoge.home>
+</properties>
+#+END_SRC
+
+*** 自分で設定したプロパティを表示してみよう  
+
+#+BEGIN_SRC xml
+     <echo message="my.prop=${my.prop}"/>
+#+END_SRC

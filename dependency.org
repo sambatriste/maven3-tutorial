@@ -3,7 +3,6 @@
 #+SETUPFILE: ./conf.org
 
 
-
 ** アーティファクト
 
 mavenでは、あるmavenモジュールから作り出される成果物（典型的にはjarやwarファイル）を

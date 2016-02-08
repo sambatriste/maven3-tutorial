@@ -2,8 +2,6 @@
 #+SETUPFILE: ./conf.org
 #+TITLE: Maven3 チュートリアル
 
-
-
 * Hello Maven
 
 #+INCLUDE: hello_maven.org
@@ -29,7 +27,7 @@
 
 #+INCLUDE: properties.org
 
-* TODO フェーズとゴール
+* フェーズとゴール
 
 #+INCLUDE: phase_and_goal.org
 
