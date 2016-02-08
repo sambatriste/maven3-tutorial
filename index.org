@@ -31,15 +31,15 @@
 
 #+INCLUDE: phase_and_goal.org
 
-* TODO プラグイン
+* プラグイン
 
 #+INCLUDE: plugin.org
 
-* TODO pomの継承
+* pomの継承
 
 #+INCLUDE: parent_pom.org
 
-* TODO マルチモジュール構成
+* マルチモジュール構成
 
 #+INCLUDE: multi_module.org
 

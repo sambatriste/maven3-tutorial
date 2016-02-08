@@ -1,2 +1,24 @@
 # -*- mode: org; coding: utf-8-unix -*-
 #+SETUPFILE: ./conf.org
+
+** ライフサイクル、フェーズ、ゴール
+
+Mavenのライフサイクルにはいくつかのフェーズがあり、
+各フェーズは、いくつかのゴールと関連付けられています。
+
+https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html
+
+- フェーズはイベントと考えるとわかりやすい
+- ゴールはイベント発生時にコールバックされる処理
+- どのようなゴールが関連付けられているかはpomの設定による(例:mvn package)
+
+
+*** デフォルトライフサイクル(抜粋)
+
+- validate
+- compile
+- test
+- package
+- verify
+- install
+- deploy
