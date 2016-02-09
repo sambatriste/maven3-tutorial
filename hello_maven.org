@@ -2,6 +2,8 @@
 
 #+SETUPFILE: ./conf.org
 
+** この章のねらい
+- とにかくMavenを動かして慣れよう！
 
 ** TODO archetypeからプロジェクト作成してみよう
 
@@ -260,3 +262,31 @@ org.hamcrest:hamcrest-coreというライブラリは、なぜ現れたのでし
 #+begin_src sh
 mvn dependency:tree
 #+end_src
+
+** TODO helpを表示してみよう
+
+#+BEGIN_SRC sh
+mvn -h
+#+END_SRC
+
+*** 出力結果（抜粋）
+
+#+BEGIN_EXAMPLE
+usage: mvn [options] [<goal(s)>] [<phase(s)>]
+
+Options:
+ -D,--define <arg>                      Define a system property
+ -f,--file <arg>                        Force the use of an alternate POM
+                                        file (or directory with pom.xml).
+ -h,--help                              Display help information
+ -o,--offline                           Work offline
+ -P,--activate-profiles <arg>           Comma-delimited list of profiles
+                                        to activate
+ -s,--settings <arg>                    Alternate path for the user
+                                        settings file
+ -U,--update-snapshots                  Forces a check for missing
+                                        releases and updated snapshots on
+                                        remote repositories
+ -v,--version                           Display version information
+ -X,--debug                             Produce execution debug output
+#+END_EXAMPLE

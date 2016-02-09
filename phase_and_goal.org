@@ -22,3 +22,11 @@ https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html
 - verify
 - install
 - deploy
+
+** フェーズ
+
+
+
+** ゴール
+
+プラグインが提供する。

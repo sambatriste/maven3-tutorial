@@ -2,6 +2,9 @@
 
 #+SETUPFILE: ./conf.org
 
+** この章のねらい
+- pom.xmlとIDEがどう関連するかを学ぼう！
+
 ** TODO MavenプロジェクトをEclipseに取り込んでみよう
 
 #+BEGIN_EXAMPLE

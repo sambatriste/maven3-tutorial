@@ -2,25 +2,43 @@
 
 #+SETUPFILE: ./conf.org
 
+** この章のねらい
 
+- 各リポジトリの関係を理解しよう！
+- リポジトリ間の関係を理解しよう！
 
 ** リポジトリの種類
 
+Mavenで「リポジトリ」という場合、大きく２つに分類されます。
+- ローカルリポジトリ
+- リモートリポジトリ
 
-| 種類                   | 説明                                                             | 主な用途                          |
-|------------------------+------------------------------------------------------------------+-----------------------------------|
-| ローカルリポジトリ     | ローカルPC上にあるリポジトリ( ~/.m2/repository )                 | キャッシュ                        |
-| インハウスリポジトリ　 | PJ内で構築したリポジトリ                                         | PJ成果物(jar等)をPJ向けに公開する |
-| リモートリポジトリ     | インターネット上に公開されたリポジトリ(Maven Central, jcenter等) | ライブラリを公開する              |
+
+
+| 種類                                         | 説明                                                             | 主な用途                          |
+|----------------------------------------------+------------------------------------------------------------------+-----------------------------------|
+| ローカルリポジトリ                           | ローカルPC上にあるリポジトリ( ~/.m2/repository )                 | Mavenが直接参照する               |
+| リモートリポジトリ（インハウスリポジトリ）　 | PJ内で構築したリポジトリ                                         | PJ成果物(jar等)をPJ向けに公開する |
+| リモートリポジトリ（公開リポジトリ）         | インターネット上に公開されたリポジトリ(Maven Central, jcenter等) | ライブラリを公開する              |
+
+
 
 
 #+BEGIN_SRC plantuml :file resources/repositories.png :cmdline -charset UTF-8
-component "ローカルリポジトリ" as local
-component "インハウスリポジトリ" as inhouse
-component "リモートリポジトリ" as remote
+
+package "ローカルPC" <<Node>> {
+  component "ローカルリポジトリ" as local
+}
+package "PJ共有マシン" <<Node>> {
+  component "インハウスリポジトリ" as inhouse
+}
+package "インターネット" <<Node>> {
+  component "公開リポジトリ" as remote
+}
 
 local ..> inhouse
 inhouse ..> remote 
+
 #+END_SRC
 
 #+RESULTS:
@@ -134,3 +152,34 @@ mvn help:effective-pom
     </repository>
   </repositories>
 #+END_SRC
+
+** トラブルシューティング
+
+*** 依存関係が解決できない場合
+
+**** コマンドラインでupdateを指示する
+
+-Uオプションを使用することでリモートリポジトリに取得しにいきます。
+
+#+BEGIN_SRC 
+mvn -U compile
+#+END_SRC
+
+**** ローカルリポジトリからアーティファクト(jar)を削除する
+
+ローカルリポジトリにjarがなければ、リモートリポジトリに取得しに行きます。
+
+#+BEGIN_SRC sh
+rm ~/.m2/repository/junit/junit/3.8.1/*
+#+END_SRC
+
+**** ローカルリポジトリに直接mvn installする
+
+明示的にローカルリポジトリにインストールしてしまえば、
+依存関係の問題はさしあたり発生しません。
+
+#+BEGIN_SRC sh
+mvn install:install-file -Dfile=<ファイル>
+#+END_SRC
+
+
