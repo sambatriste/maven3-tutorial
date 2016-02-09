@@ -1,5 +1,7 @@
 # -*- mode: org; coding: utf-8-unix -*-
 #+SETUPFILE: ./conf.org
+#+SETUPFILE: ./style.org
+
 #+TITLE: Maven3 チュートリアル
 
 * Hello Maven
