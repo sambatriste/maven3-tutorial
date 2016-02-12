@@ -6,27 +6,43 @@
 Mavenのライフサイクルにはいくつかのフェーズがあり、
 各フェーズは、いくつかのゴールと関連付けられています。
 
-https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html
+#+BEGIN_SRC plantuml :file resources/lifecycle.png :cmdline -charset UTF-8
+object Lifecycle
+object Phase
+object Goal
+
+Lifecycle "1" o- "*" Phase : has
+Phase "1" o- "*" Goal : has
+
+#+END_SRC
+
+#+RESULTS:
+[[file:resources/lifecycle.png]]
 
 - フェーズはイベントと考えるとわかりやすい
 - ゴールはイベント発生時にコールバックされる処理
 - どのようなゴールが関連付けられているかはpomの設定による(例:mvn package)
 
-
-*** デフォルトライフサイクル(抜粋)
-
-- validate
-- compile
-- test
-- package
-- verify
-- install
-- deploy
+#+CAPTION: 「Maven by Example - 3.5.1. Maven Plugins and Goals」 より
+http://books.sonatype.com/mvnex-book/reference/figs/web/simple-project_plugin.png
 
 ** フェーズ
 
+主要なフェーズを以下に示します。
+
+| フェーズ | 役割                             |
+|----------+----------------------------------|
+| compile  | コンパイル                       |
+| test     | テスト                           |
+| package  | アーティファクト(jar)を作成      |
+| install  | ローカルリポジトリにインストール |
+| deploy   | リモートリポジトリにデプロイ     |
 
 
-** ゴール
+各フェーズに登録されたゴールが実行されることによってビルドが行われます。
+ゴールはプラグインが提供します。
 
-プラグインが提供する。
+#+CAPTION: 「Maven by Example - 3.5.2. Maven Lifecycle」 より
+[[http://books.sonatype.com/mvnex-book/reference/figs/web/simple-project_lifecyclebinding.png]]
+
+

@@ -1,0 +1,3 @@
+skinparam backgroundColor transparent
+skinparam componentStyle uml2
+skinparam defaultFontName Migu 1M

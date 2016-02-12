@@ -26,6 +26,7 @@ Mavenで「リポジトリ」という場合、大きく２つに分類されま
 
 #+BEGIN_SRC plantuml :file resources/repositories.png :cmdline -charset UTF-8
 
+
 package "ローカルPC" <<Node>> {
   component "ローカルリポジトリ" as local
 }
@@ -64,7 +65,7 @@ dev <-- mvn : build success
 #+END_SRC
 
 #+RESULTS:
-[[file:resources/retrieve-local-cache.png]]
+[[file:resources/repositories.png]]
 
 
 ** インハウスリポジトリ
