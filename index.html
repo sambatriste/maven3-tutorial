@@ -4,9 +4,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Maven3 チュートリアル</title>
-<!-- 2016-02-12 Fri 18:45 -->
+<!-- 2016-02-14 Sun 16:33 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
+<meta  name="author" content="T.Kawasaki" />
 <style type="text/css">
  <!--/*--><![CDATA[/*><!--*/
   .title  { text-align: center; }
@@ -91,8 +92,10 @@
 <link rel="stylesheet" type="text/css" href="http://www.pirilampo.org/styles/readtheorg/css/readtheorg.css"/>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="https://raw.github.com/jmosbech/StickyTableHeaders/master/js/jquery.stickytableheaders.min.js"></script>
-<script type="text/javascript" src="http://www.pirilampo.org/styles/readtheorg/js/readtheorg.js"></script>
+<script src="https://raw.github.com/jmosbech/StickyTableHeaders/master/js/jquery.stickytableheaders.min.js"></script>
+<script src="http://www.pirilampo.org/styles/readtheorg/js/readtheorg.js"></script>
+<script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+<script src="resources/prettifier.js"></script>
 <script type="text/javascript">
 /*
 @licstart  The following is the entire license notice for the
@@ -281,7 +284,11 @@ for the JavaScript code in this tag.
 </li>
 <li><a href="#sec-8">8. プラグイン</a>
 <ul>
-<li><a href="#sec-8-1">8.1. <span class="todo TODO">TODO</span> 新たにプラグインを追加してみよう</a></li>
+<li><a href="#sec-8-1">8.1. <span class="todo TODO">TODO</span> 新たにプラグインを追加してみよう</a>
+<ul>
+<li><a href="#sec-8-1-1">8.1.1. <span class="todo TODO">TODO</span> 小テスト</a></li>
+</ul>
+</li>
 <li><a href="#sec-8-2">8.2. <span class="todo TODO">TODO</span> 既存のプラグインの設定を変更してみよう</a></li>
 </ul>
 </li>
@@ -417,7 +424,7 @@ more pom.xml
     &lt;dependency&gt;
       &lt;groupId&gt;junit&lt;/groupId&gt;
       &lt;artifactId&gt;junit&lt;/artifactId&gt;
-      &lt;version&gt;4.12&lt;/version&gt;
+      &lt;version&gt;3.8.1&lt;/version&gt;
       &lt;scope&gt;test&lt;/scope&gt;
     &lt;/dependency&gt;
   &lt;/dependencies&gt;
@@ -690,7 +697,8 @@ ls target/classes
 <li><a id="sec-1-6-3-2" name="sec-1-6-3-2"></a>src/main/resources<br  /><div class="outline-text-5" id="text-1-6-3-2">
 <div class="org-src-container">
 
-<pre class="src src-sh">mv src/main/java/hoge.txt src/main/resources/
+<pre class="src src-sh"># aaa
+mv src/main/java/hoge.txt src/main/resources/
 mvn clean compile
 ls target/classes
 </pre>
@@ -1869,10 +1877,6 @@ Mavenのライフサイクルにはいくつかのフェーズがあり、
 </p>
 </div>
 
-<p>
-<a href="https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html">https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html</a>
-</p>
-
 <ul class="org-ul">
 <li>フェーズはイベントと考えるとわかりやすい
 </li>
@@ -1898,25 +1902,50 @@ Mavenのライフサイクルにはいくつかのフェーズがあり、
 主要なフェーズを以下に示します。
 </p>
 
-<ul class="org-ul">
-<li>validate
-</li>
-<li>compile
-</li>
-<li>test
-</li>
-<li>package
-</li>
-<li>verify
-</li>
-<li>install
-</li>
-<li>deploy
-</li>
-</ul>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">フェーズ</th>
+<th scope="col" class="left">役割</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">compile</td>
+<td class="left">コンパイル</td>
+</tr>
+
+<tr>
+<td class="left">test</td>
+<td class="left">テスト</td>
+</tr>
+
+<tr>
+<td class="left">package</td>
+<td class="left">アーティファクト(jar)を作成</td>
+</tr>
+
+<tr>
+<td class="left">install</td>
+<td class="left">ローカルリポジトリにインストール</td>
+</tr>
+
+<tr>
+<td class="left">deploy</td>
+<td class="left">リモートリポジトリにデプロイ</td>
+</tr>
+</tbody>
+</table>
+
 
 <p>
-フェーズそれ自体は特に何の処理も提供しません。
 各フェーズに登録されたゴールが実行されることによってビルドが行われます。
 ゴールはプラグインが提供します。
 </p>
@@ -1973,6 +2002,48 @@ Mavenの機能の多くはプラグインにより提供されています。
 
 <div id="outline-container-sec-8-1" class="outline-3">
 <h3 id="sec-8-1"><span class="section-number-3">8.1</span> <span class="todo TODO">TODO</span> 新たにプラグインを追加してみよう</h3>
+<div class="outline-text-3" id="text-8-1">
+<p>
+CheckStyleプラグインを導入してみよう。
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-xml">&lt;plugin&gt;
+   &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+   &lt;artifactId&gt;maven-checkstyle-plugin&lt;/artifactId&gt;
+   &lt;version&gt;2.17&lt;/version&gt;
+   &lt;executions&gt;
+     &lt;execution&gt;
+       &lt;id&gt;checkstyle&lt;/id&gt;
+       &lt;phase&gt;verify&lt;/phase&gt;
+       &lt;goals&gt;
+         &lt;goal&gt;checkstyle&lt;/goal&gt;
+       &lt;/goals&gt;
+     &lt;/execution&gt;
+   &lt;/executions&gt;
+ &lt;/plugin&gt;
+</pre>
+</div>
+
+<p>
+記載したら実行してみよう。
+</p>
+
+<pre class="example">
+mvn install
+less target/checkstyle-result.xml
+</pre>
+</div>
+
+<div id="outline-container-sec-8-1-1" class="outline-4">
+<h4 id="sec-8-1-1"><span class="section-number-4">8.1.1</span> <span class="todo TODO">TODO</span> 小テスト</h4>
+<div class="outline-text-4" id="text-8-1-1">
+<p>
+どうして、mvn installしたらCheckStyleも実行されたのだろうか？
+</p>
+</div>
+</div>
 </div>
 
 <div id="outline-container-sec-8-2" class="outline-3">
@@ -1993,7 +2064,8 @@ Mavenの機能の多くはプラグインにより提供されています。
 </div>
 </div>
 <div id="postamble" class="status">
-<p class="date">Created: 2016-02-12 Fri 18:45</p>
+<p class="author">Author: T.Kawasaki</p>
+<p class="date">Created: 2016-02-14 Sun 16:33</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>

@@ -38,6 +38,7 @@ CheckStyleプラグインを導入してみよう。
 
 #+BEGIN_EXAMPLE
 mvn install
+# checkstyle結果を確認
 less target/checkstyle-result.xml
 #+END_EXAMPLE
 
