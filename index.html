@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2016-02-15 月 14:48 -->
+<!-- 2016-02-15 月 16:05 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="viewport" content="width=device-width, initial-scale=1" />
 <title>Maven3 チュートリアル</title>
@@ -287,18 +287,22 @@ for the JavaScript code in this tag.
 <li><a href="#orgheadline74">7.2. フェーズ</a></li>
 </ul>
 </li>
-<li><a href="#orgheadline79">8. プラグイン</a>
+<li><a href="#orgheadline80">8. プラグイン</a>
 <ul>
 <li><a href="#orgheadline77">8.1. <span class="todo nilTODO">TODO</span> 新たにプラグインを追加してみよう</a>
 <ul>
 <li><a href="#orgheadline76">8.1.1. <span class="todo nilTODO">TODO</span> 小テスト</a></li>
 </ul>
 </li>
-<li><a href="#orgheadline78">8.2. <span class="todo nilTODO">TODO</span> 既存のプラグインの設定を変更してみよう</a></li>
+<li><a href="#orgheadline79">8.2. <span class="todo nilTODO">TODO</span> 既存のプラグインの設定を変更してみよう</a>
+<ul>
+<li><a href="#orgheadline78">8.2.1. コンパイラの設定を変更する</a></li>
 </ul>
 </li>
-<li><a href="#orgheadline80">9. pomの継承</a></li>
-<li><a href="#orgheadline81">10. マルチモジュール構成</a></li>
+</ul>
+</li>
+<li><a href="#orgheadline81">9. pomの継承</a></li>
+<li><a href="#orgheadline82">10. マルチモジュール構成</a></li>
 </ul>
 </div>
 </div>
@@ -1531,7 +1535,7 @@ Mavenで「リポジトリ」という場合、大きく２つに分類されま
 
 
 <div class="figure">
-<p><img src="resources/repositories.png" alt="repositories.png" />
+<p><img src="resources/retrieve-local-cache.png" alt="retrieve-local-cache.png" />
 </p>
 </div>
 </div>
@@ -1948,8 +1952,8 @@ Mavenのライフサイクルにはいくつかのフェーズがあり、
 </div>
 </div>
 
-<div id="outline-container-orgheadline79" class="outline-2">
-<h2 id="orgheadline79"><span class="section-number-2">8</span> プラグイン</h2>
+<div id="outline-container-orgheadline80" class="outline-2">
+<h2 id="orgheadline80"><span class="section-number-2">8</span> プラグイン</h2>
 <div class="outline-text-2" id="text-8">
 <p>
 Mavenの機能の多くはプラグインにより提供されています。
@@ -2014,15 +2018,50 @@ CheckStyleプラグインを導入してみよう。
 </pre>
 </div>
 
-<p>
-記載したら実行してみよう。
-</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh"># pom.xmlにプラグインの記述を追記する
+vi pom.xml
+
+# ゴールを直接指定して実行
+mvn checkstyle:check  # mvn -f pom-cs.xml でもOK
+</pre>
+</div>
 
 <pre class="example">
-mvn install
+[INFO] --- maven-checkstyle-plugin:2.17:check (default-cli) @ plugin ---
+[INFO] There are 12 errors reported by Checkstyle 6.11.2 with sun_checks.xml ruleset.
+[ERROR] src\main\java\com\example\App.java:[0] (javadoc) JavadocPackage: package-info.javaファイルがありません。
+[ERROR] src\main\java\com\example\App.java:[0] (misc) NewlineAtEndOfFile: ファイルが新しい行で終了していません。
+[ERROR] src\main\java\com\example\App.java:[7] (regexp) RegexpSingleline: Line has trailing spaces.
+[ERROR] src\main\java\com\example\App.java:[7,1] (design) HideUtilityClassConstructor: ユーティリティクラスは、パブリックまたはデフォルトコンストラクタを持つべきではありません。
+[ERROR] src\main\java\com\example\App.java:[8,1] (blocks) LeftCurly: '{' 列に 1 前の行にする必要があります。
+[ERROR] src\main\java\com\example\App.java:[9,5] (javadoc) JavadocMethod: Javadoc コメントがありません。
+[ERROR] src\main\java\com\example\App.java:[9,29] (whitespace) ParenPad: '(' の後にホワイトスペースがあります。
+[ERROR] src\main\java\com\example\App.java:[9,30] (misc) FinalParameters: パラメータargs最終的にする必要があります。
+[ERROR] src\main\java\com\example\App.java:[9,43] (whitespace) ParenPad: ')' の前にホワイトスペースがあります。
+[ERROR] src\main\java\com\example\App.java:[10,5] (blocks) LeftCurly: '{' 列に 5 前の行にする必要があります。
+[ERROR] src\main\java\com\example\App.java:[11,28] (whitespace) ParenPad: '(' の後にホワイトスペースがあります。
+[ERROR] src\main\java\com\example\App.java:[11,43] (whitespace) ParenPad: ')' の前にホワイトスペースがあります。
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+</pre>
+
+<p>
+フェーズを指定して実行してみよう。
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh"># フェーズを指定して実行
+mvn clean install
+
 # checkstyle結果を確認
 less target/checkstyle-result.xml
 </pre>
+</div>
 </div>
 
 <div id="outline-container-orgheadline76" class="outline-4">
@@ -2035,25 +2074,115 @@ less target/checkstyle-result.xml
 </div>
 </div>
 
-<div id="outline-container-orgheadline78" class="outline-3">
-<h3 id="orgheadline78"><span class="section-number-3">8.2</span> <span class="todo TODO">TODO</span> 既存のプラグインの設定を変更してみよう</h3>
-</div>
+<div id="outline-container-orgheadline79" class="outline-3">
+<h3 id="orgheadline79"><span class="section-number-3">8.2</span> <span class="todo TODO">TODO</span> 既存のプラグインの設定を変更してみよう</h3>
+<div class="outline-text-3" id="text-8-2">
+</div><div id="outline-container-orgheadline78" class="outline-4">
+<h4 id="orgheadline78"><span class="section-number-4">8.2.1</span> コンパイラの設定を変更する</h4>
+<div class="outline-text-4" id="text-8-2-1">
+<div class="org-src-container">
+
+<pre class="src src-xml">&lt;properties&gt;
+  &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;
+  &lt;java.version&gt;1.8&lt;/java.version&gt;
+&lt;/properties&gt;
+
+&lt;build&gt;
+  &lt;plugins&gt;
+    &lt;!-- ここにプラグインの記述を記載します --&gt;
+    &lt;plugin&gt;
+      &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+      &lt;artifactId&gt;maven-compiler-plugin&lt;/artifactId&gt;
+      &lt;version&gt;3.5.1&lt;/version&gt;
+      &lt;configuration&gt;
+        &lt;source&gt;${java.version}&lt;/source&gt;
+        &lt;target&gt;${java.version}&lt;/target&gt;
+      &lt;/configuration&gt;
+    &lt;/plugin&gt;
+  &lt;/plugins&gt;
+&lt;/build&gt;
+</pre>
 </div>
 
-<div id="outline-container-orgheadline80" class="outline-2">
-<h2 id="orgheadline80"><span class="section-number-2">9</span> pomの継承</h2>
-<div class="outline-text-2" id="text-9">
+<div class="org-src-container">
+
+<pre class="src src-sh">vi pom.xml
+mvn compile  # mvn -f pom-java8.xml でもOK
+
+# classファイルの中身を確認する
+javap -v target/classes/com/example/App.class
+</pre>
+</div>
+
+<pre class="example">
+  Last modified 2016/02/15; size 537 bytes
+  MD5 checksum b675c50db7181ec07a659cfe45c5d67f
+  Compiled from "App.java"
+public class com.example.App
+  minor version: 0
+  major version: 52
+  flags: ACC_PUBLIC, ACC_SUPER
+</pre>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-right" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">minor version</th>
+<th scope="col" class="org-right">Javaのバージョン</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">49</td>
+<td class="org-right">1.5</td>
+</tr>
+
+<tr>
+<td class="org-right">50</td>
+<td class="org-right">1.6</td>
+</tr>
+
+<tr>
+<td class="org-right">51</td>
+<td class="org-right">1.7</td>
+</tr>
+
+<tr>
+<td class="org-right">52</td>
+<td class="org-right">1.8</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+0x50=Java1.6だけは覚えておくとよい。
+</p>
+</div>
+</div>
 </div>
 </div>
 
 <div id="outline-container-orgheadline81" class="outline-2">
-<h2 id="orgheadline81"><span class="section-number-2">10</span> マルチモジュール構成</h2>
+<h2 id="orgheadline81"><span class="section-number-2">9</span> pomの継承</h2>
+<div class="outline-text-2" id="text-9">
+</div>
+</div>
+
+<div id="outline-container-orgheadline82" class="outline-2">
+<h2 id="orgheadline82"><span class="section-number-2">10</span> マルチモジュール構成</h2>
 <div class="outline-text-2" id="text-10">
 </div>
 </div>
 </div>
 <div id="postamble" class="status">
-<p class="date">Created: 2016-02-15 月 14:48</p>
+<p class="date">Created: 2016-02-15 月 16:05</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
