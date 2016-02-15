@@ -162,7 +162,7 @@ mvn help:effective-pom
 
 -Uオプションを使用することでリモートリポジトリに取得しにいきます。
 
-#+BEGIN_SRC 
+#+BEGIN_SRC sh
 mvn -U compile
 #+END_SRC
 

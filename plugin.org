@@ -34,16 +34,98 @@ CheckStyleプラグインを導入してみよう。
      </plugin>
 #+END_SRC
 
-記載したら実行してみよう。
+
+#+BEGIN_SRC sh
+# pom.xmlにプラグインの記述を追記する
+vi pom.xml
+
+# ゴールを直接指定して実行
+mvn checkstyle:check  # mvn -f pom-cs.xml でもOK
+#+END_SRC
 
 #+BEGIN_EXAMPLE
-mvn install
+[INFO] --- maven-checkstyle-plugin:2.17:check (default-cli) @ plugin ---
+[INFO] There are 12 errors reported by Checkstyle 6.11.2 with sun_checks.xml ruleset.
+[ERROR] src\main\java\com\example\App.java:[0] (javadoc) JavadocPackage: package-info.javaファイルがありません。
+[ERROR] src\main\java\com\example\App.java:[0] (misc) NewlineAtEndOfFile: ファイルが新しい行で終了していません。
+[ERROR] src\main\java\com\example\App.java:[7] (regexp) RegexpSingleline: Line has trailing spaces.
+[ERROR] src\main\java\com\example\App.java:[7,1] (design) HideUtilityClassConstructor: ユーティリティクラスは、パブリックまたはデフォルトコンストラクタを持つべきではありません。
+[ERROR] src\main\java\com\example\App.java:[8,1] (blocks) LeftCurly: '{' 列に 1 前の行にする必要があります。
+[ERROR] src\main\java\com\example\App.java:[9,5] (javadoc) JavadocMethod: Javadoc コメントがありません。
+[ERROR] src\main\java\com\example\App.java:[9,29] (whitespace) ParenPad: '(' の後にホワイトスペースがあります。
+[ERROR] src\main\java\com\example\App.java:[9,30] (misc) FinalParameters: パラメータargs最終的にする必要があります。
+[ERROR] src\main\java\com\example\App.java:[9,43] (whitespace) ParenPad: ')' の前にホワイトスペースがあります。
+[ERROR] src\main\java\com\example\App.java:[10,5] (blocks) LeftCurly: '{' 列に 5 前の行にする必要があります。
+[ERROR] src\main\java\com\example\App.java:[11,28] (whitespace) ParenPad: '(' の後にホワイトスペースがあります。
+[ERROR] src\main\java\com\example\App.java:[11,43] (whitespace) ParenPad: ')' の前にホワイトスペースがあります。
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+#+END_EXAMPLE
+
+フェーズを指定して実行してみよう。
+
+#+BEGIN_SRC sh
+# フェーズを指定して実行
+mvn clean install
+
 # checkstyle結果を確認
 less target/checkstyle-result.xml
-#+END_EXAMPLE
+#+END_SRC
 
 *** TODO 小テスト
 
 どうして、mvn installしたらCheckStyleも実行されたのだろうか？
 
 ** TODO 既存のプラグインの設定を変更してみよう
+
+*** コンパイラの設定を変更する
+#+BEGIN_SRC xml
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <java.version>1.8</java.version>
+  </properties>
+
+  <build>
+    <plugins>
+      <!-- ここにプラグインの記述を記載します -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.5.1</version>
+        <configuration>
+          <source>${java.version}</source>
+          <target>${java.version}</target>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+#+END_SRC
+
+#+BEGIN_SRC sh
+
+vi pom.xml
+mvn compile  # mvn -f pom-java8.xml でもOK
+
+# classファイルの中身を確認する
+javap -v target/classes/com/example/App.class 
+#+END_SRC
+
+#+BEGIN_EXAMPLE
+  Last modified 2016/02/15; size 537 bytes
+  MD5 checksum b675c50db7181ec07a659cfe45c5d67f
+  Compiled from "App.java"
+public class com.example.App
+  minor version: 0
+  major version: 52
+  flags: ACC_PUBLIC, ACC_SUPER
+#+END_EXAMPLE
+
+| minor version | Javaのバージョン |
+|---------------+------------------|
+|            49 |              1.5 |
+|            50 |              1.6 |
+|            51 |              1.7 |
+|            52 |              1.8 |
+
+0x50=Java1.6だけは覚えておくとよい。

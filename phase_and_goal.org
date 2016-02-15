@@ -10,9 +10,11 @@ Mavenのライフサイクルにはいくつかのフェーズがあり、
 object Lifecycle
 object Phase
 object Goal
+object Plugin
 
 Lifecycle "1" o- "*" Phase : has
-Phase "1" o- "*" Goal : has
+Plugin "1" o- "*" Goal :has
+Phase  ..>  Goal : use
 
 #+END_SRC
 
