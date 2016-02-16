@@ -168,6 +168,7 @@ src/main配下のクラスで、junitのクラスを使ってみる。
 #+begin_src java
     public static void main( String[] args )
     {
+        // JUnitのクラスを使ってみる。
         junit.framework.TestCase.assertTrue(true);
         System.out.println( "Hello World!" );
     }

@@ -24,8 +24,11 @@ Mavenがデフォルトで用意しているプロパティがあります。
 プロパティにどんな値が設定されているか表示してみよう。
 
 #+BEGIN_SRC sh
+# pom.xmlの内容を確認する
 cd example/maven_props
-more pom.xml
+less pom.xml
+
+# 実行してプロパティを表示する。
 mvn antrun:run
 #+END_SRC
 
@@ -54,18 +57,20 @@ env.JAVA_HOME
 *** 環境変数PATHを表示させてみよう
 
 #+BEGIN_SRC sh
-vi example/maven_props/pom.xml
+# pom.xmlを編集する
+vi pom.xml
+# 実行してプロパティを表示する。
 mvn antrun:run
 #+END_SRC
 
 
 ** TODO ユーザ定義プロパティ
 
-<properties>内に、以下のようにして任意のプロパティを設定できます。
+<properties>内に、以下のように記載することで、　任意のプロパティを設定できます。
 
-#+BEGIN_EXAMPLE
+#+BEGIN_SRC xml
 <プロパティ名>プロパティ値</プロパティ名>
-#+END_EXAMPLE
+#+END_SRC
 
 #+BEGIN_SRC xml
 <project>
@@ -97,8 +102,15 @@ mvn antrun:run
 </properties>
 #+END_SRC
 
-*** 自分で設定したプロパティを表示してみよう  
+*** 自分で設定したプロパティを表示してみよう 
 
 #+BEGIN_SRC xml
-     <echo message="my.prop=${my.prop}"/>
+   <echo message="my.prop=${my.prop}"/>
+#+END_SRC
+
+#+BEGIN_SRC sh
+# pom.xmlを編集する
+vi pom.xml
+# 実行してプロパティを表示する。
+mvn antrun:run
 #+END_SRC

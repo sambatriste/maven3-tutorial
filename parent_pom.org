@@ -1,2 +1,27 @@
 # -*- mode: org; coding: utf-8-unix -*-
 #+SETUPFILE: ./conf.org
+
+** pomの継承
+
+pom.xmlはひとつの親pom.xmlを持つことができ、親pom.xmlの情報を引き継ぐことができます。
+
+複数のモジュール間で共通の設定を使用したい場合に便利です。
+
+- 共通のプロパティを使用したい（ファイルパス等）
+- 使用するプラグインのバージョンを揃えたい
+- プラグインの設定を共通化したい（CheckStyle, FindBugs等）
+
+子のpom.xmlは親からの差分を記述します。
+
+
+** デフォルトのSuper pom
+
+http://maven.apache.org/ref/3.3.9/maven-model-builder/super-pom.html
+
+** 継承する方法
+
+<parent>
+
+** TODO 親pomを継承してみよう
+
+** TODO 親pomの設定を変更してみよう
