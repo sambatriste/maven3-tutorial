@@ -20,7 +20,37 @@ http://maven.apache.org/ref/3.3.9/maven-model-builder/super-pom.html
 
 ** 継承する方法
 
+継承するpom.xmlを<parent>に記載します。
+
+ファイルシステム上、近い場所に配置されている場合、
+pom.xmlへの相対パスを記述できます(relativePath)。
+デフォルトは一つ上のディレクトリになります。
+
+#+BEGIN_SRC xml
 <parent>
+  <groupId>グループID</groupId>
+  <artifactId>アーティファクトID</artifactId>
+  <version>バージョン</version>
+  <!-- 兄弟ディレクトリを参照 -->
+  <relativePath>../parent/</relativePath>
+</parent>
+#+END_SRC
+
+そうでない場合、すなわちローカルリポジトリまたはリモートリポジトリに登録されたpom.xmlを
+継承する場合は、relativePathの中身は空にします。
+
+http://central.maven.org/maven2/org/sonatype/oss/oss-parent/9/oss-parent-9.pom
+
+#+BEGIN_SRC xml
+<parent>
+　<groupId>org.sonatype.oss</groupId>
+  <artifactId>oss-parent</artifactId>
+  <version>9</version>
+　<relativePath/>
+</parent>
+#+END_SRC
+
+
 
 ** TODO 親pomを継承してみよう
 

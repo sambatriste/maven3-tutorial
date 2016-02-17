@@ -29,16 +29,17 @@ mvn archetype:generate
 Choose a number or apply filter (format: [groupId:]artifactId, case sensitive contains): 705: 
 #+END_EXAMPLE
 
-そのままエンターキーを押し、デフォルトの705(maven-archetype-quickstart)を選択します。
+そのままエンターキーを押し、デフォルトのmaven-archetype-quickstartを選択します。
 
 その他入力を求められますので以下のように入力します（デフォルト値）。
 
-| 要素       | 入力例　     |
-|------------+--------------|
-| groupId    | com.example  |
-| artifactId | hello        |
-| version    | 1.0-SNAPSHOT |
-| package    | com.example  |
+| 要素                     | 入力例　     |
+|--------------------------+--------------|
+| アーキタイプのバージョン | 1.1          |
+| groupId                  | com.example  |
+| artifactId               | hello        |
+| version                  | 1.0-SNAPSHOT |
+| package                  | com.example  |
 
 ** TODO pom.xmlを見てみよう
 
