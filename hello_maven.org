@@ -109,7 +109,11 @@ mavenのpom.xmlは多くのデフォルト設定値があります。
 settings.xmlやparentのpomを含めた設定値を出力します。
 
 #+begin_src sh
+# 標準出力に出力する場合
 mvn help:effective-pom
+
+# ファイルに出力する場合
+mvn help:effective-pom -Doutput=epom.xml
 #+end_src
 
 | pom.xmlの要素         | 説明                                      |
@@ -155,10 +159,10 @@ vi src/main/java/com/example/App.java
     }
 #+end_src
 
-テストを実行します。
+実行します。
 
 #+begin_src bash
-mvn test
+java -cp target/classes com.example.App
 #+end_src
 
 
