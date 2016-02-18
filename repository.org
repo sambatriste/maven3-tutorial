@@ -65,7 +65,8 @@ dev <-- mvn : build success
 #+END_SRC
 
 #+RESULTS:
-[[file:resources/repositories.png]]
+[[file:resources/retrieve-local-cache.png]]
+
 
 
 ** インハウスリポジトリ
@@ -183,4 +184,13 @@ rm ~/.m2/repository/junit/junit/3.8.1/*
 mvn install:install-file -Dfile=<ファイル>
 #+END_SRC
 
+
+#+BEGIN_SRC 
+# jarとpomをダウンロードする
+wget https://repo.maven.apache.org/maven2/joda-time/joda-time/2.9.2/joda-time-2.9.2.jar
+wget https://repo.maven.apache.org/maven2/joda-time/joda-time/2.9.2/joda-time-2.9.2.pom
+
+# 手動でインストールする
+mvn install:install-file -Dfile=joda-time-2.9.2.jar -DpomFile=joda-time-2.9.2.pom
+#+END_SRC
 

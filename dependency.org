@@ -101,14 +101,12 @@ app_dev -> inhouse : GET pj-lib-1.0.1.jar
 app_dev <-- inhouse : インタフェースが変更された\nライブラリ\n(v1.0.1)
 
 app_dev -> app_dev : コンパイルエラーを修正
-
-アプリ開発チームは、任意のタイミングでバージョンアップを行えます。
-
-
 #+END_SRC
 
 #+RESULTS:
 [[file:resources/lib-mvn.png]]
+
+アプリ開発チームは、任意のタイミングでバージョンアップを行えます。
 
 **** 注意点
 
