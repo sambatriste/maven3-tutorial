@@ -187,7 +187,7 @@ mvn test
 
 #+begin_example
 [ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.1:compile (default-compile) on project hello: Compilation failure
-[ERROR] /home/kawasaki/tmp/mvn_test/hello/src/main/java/com/example/App.java:[11,24] パッケージjunit.frameworkは存在しません
+[ERROR] /home/hoge/mvn3-tutorial/example/hello/src/main/java/com/example/App.java:[11,24] パッケージjunit.frameworkは存在しません
 #+end_example
 
 なぜコンパイルは失敗したのでしょうか？

@@ -3,9 +3,9 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>com.example</groupId>
-    <artifactId>parent-pom</artifactId>
-    <version>1.0-SNAPSHOT</version>
-    <relativePath>../parent-pom</relativePath>
+    <artifactId>my-parent</artifactId>
+    <version>1.0.0</version>
+    <relativePath>../my-parent</relativePath>
   </parent>
 
   <artifactId>my-lib</artifactId>

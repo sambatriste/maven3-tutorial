@@ -4,10 +4,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Maven3 チュートリアル</title>
-<!-- 2016-02-18 Thu 21:22 -->
+<!-- 2016-02-19 Fri 19:49 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
-<meta  name="author" content="T.Kawasaki" />
 <style type="text/css">
  <!--/*--><![CDATA[/*><!--*/
   .title  { text-align: center; }
@@ -297,7 +296,11 @@ for the JavaScript code in this tag.
 </li>
 <li><a href="#sec-9">9. pomの継承</a>
 <ul>
-<li><a href="#sec-9-1">9.1. pomの継承</a></li>
+<li><a href="#sec-9-1">9.1. pomの継承</a>
+<ul>
+<li><a href="#sec-9-1-1">9.1.1. 何のためか？</a></li>
+</ul>
+</li>
 <li><a href="#sec-9-2">9.2. デフォルトのSuper pom</a></li>
 <li><a href="#sec-9-3">9.3. 継承する方法</a></li>
 <li><a href="#sec-9-4">9.4. <span class="todo TODO">TODO</span> 親pomを継承してみよう</a></li>
@@ -312,6 +315,9 @@ for the JavaScript code in this tag.
 </ul>
 </div>
 </div>
+<p>
+n# -*- mode: org; coding: utf-8-unix -*-
+</p>
 
 <div id="outline-container-sec-1" class="outline-2">
 <h2 id="sec-1"><span class="section-number-2">1</span> Hello Maven</h2>
@@ -698,7 +704,7 @@ src/main配下のクラスで、junitのクラスを使ってみる。
 
 <pre class="example">
 [ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.1:compile (default-compile) on project hello: Compilation failure
-[ERROR] /home/kawasaki/tmp/mvn_test/hello/src/main/java/com/example/App.java:[11,24] パッケージjunit.frameworkは存在しません
+[ERROR] /home/hoge/mvn3-tutorial/example/hello/src/main/java/com/example/App.java:[11,24] パッケージjunit.frameworkは存在しません
 </pre>
 
 <p>
@@ -1704,6 +1710,16 @@ Mavenで「リポジトリ」という場合、大きく２つに分類されま
 <pre class="src src-sh">mvn install:install-file -Dfile=&lt;ファイル&gt;
 </pre>
 </div>
+
+
+<pre class="example">
+# jarとpomをダウンロードする
+wget https://repo.maven.apache.org/maven2/joda-time/joda-time/2.9.2/joda-time-2.9.2.jar
+wget https://repo.maven.apache.org/maven2/joda-time/joda-time/2.9.2/joda-time-2.9.2.pom
+
+# 手動でインストールする
+mvn install:install-file -Dfile=joda-time-2.9.2.jar -DpomFile=joda-time-2.9.2.pom
+</pre>
 </div>
 </li></ol>
 </div>
@@ -2256,32 +2272,38 @@ public class com.example.App
 <h3 id="sec-9-1"><span class="section-number-3">9.1</span> pomの継承</h3>
 <div class="outline-text-3" id="text-9-1">
 <p>
-pom.xmlはひとつの親pom.xmlを持つことができ、親pom.xmlの情報を引き継ぐことができます。
+pom.xmlは親pom.xmlを持つことができ、親pom.xmlの情報を引き継ぐことができます。
+子のpom.xmlは親からの差分を記述します。
 </p>
+</div>
 
+<div id="outline-container-sec-9-1-1" class="outline-4">
+<h4 id="sec-9-1-1"><span class="section-number-4">9.1.1</span> 何のためか？</h4>
+<div class="outline-text-4" id="text-9-1-1">
 <p>
-複数のモジュール間で共通の設定を使用したい場合に便利です。
+モジュールが増えてくると、それぞれのpom.xmlに重複が発生するようになります。
+複数のモジュール間で共通の設定を使用したい場合に使用します。
 </p>
 
 <ul class="org-ul">
-<li>共通のプロパティを使用したい（ファイルパス等）
+<li>共通のプロパティを使用したい（ファイルパス、ファイルエンコーディング等）
 </li>
 <li>使用するプラグインのバージョンを揃えたい
 </li>
 <li>プラグインの設定を共通化したい（CheckStyle, FindBugs等）
 </li>
 </ul>
-
-<p>
-子のpom.xmlは親からの差分を記述します。
-</p>
 </div>
 </div>
-
+</div>
 
 <div id="outline-container-sec-9-2" class="outline-3">
 <h3 id="sec-9-2"><span class="section-number-3">9.2</span> デフォルトのSuper pom</h3>
 <div class="outline-text-3" id="text-9-2">
+<p>
+pom.xmlにはデフォルトの親pom.xmlがあります。
+</p>
+
 <p>
 <a href="http://maven.apache.org/ref/3.3.9/maven-model-builder/super-pom.html">http://maven.apache.org/ref/3.3.9/maven-model-builder/super-pom.html</a>
 </p>
@@ -2315,7 +2337,7 @@ pom.xmlへの相対パスを記述できます(relativePath)。
 
 <p>
 そうでない場合、すなわちローカルリポジトリまたはリモートリポジトリに登録されたpom.xmlを
-継承する場合は、relativePathの中身は空にします。
+継承する場合は&lt;relativePath&gt;の中身を空にします。
 </p>
 
 <p>
@@ -2335,11 +2357,46 @@ pom.xmlへの相対パスを記述できます(relativePath)。
 </div>
 </div>
 
-
-
 <div id="outline-container-sec-9-4" class="outline-3">
 <h3 id="sec-9-4"><span class="section-number-3">9.4</span> <span class="todo TODO">TODO</span> 親pomを継承してみよう</h3>
+<div class="outline-text-3" id="text-9-4">
+<div class="org-src-container">
+
+<pre class="src src-sh">cd example/parent_pom/my-lib/
+# 修正前の依存関係を表示する
+mvn dependency:tree
+# ファイルを編集して&lt;parent&gt;を追加する
+vi pom.xml
+</pre>
 </div>
+
+<div class="org-src-container">
+
+<pre class="src src-xml">&lt;parent&gt;
+  &lt;groupId&gt;com.example&lt;/groupId&gt;
+  &lt;artifactId&gt;my-parent&lt;/artifactId&gt;
+  &lt;version&gt;1.0.0&lt;/version&gt;
+  &lt;relativePath&gt;../my-parent&lt;/relativePath&gt;
+&lt;/parent&gt;
+
+&lt;artifactId&gt;my-lib&lt;/artifactId&gt;
+&lt;packaging&gt;jar&lt;/packaging&gt;
+</pre>
+</div>
+
+<div class="org-src-container">
+
+<pre class="src src-sh"># 修正前の依存関係を表示する
+mvn dependency:tree
+</pre>
+</div>
+
+<p>
+&lt;groupId&gt;と&lt;version&gt;は親pom.xmlから引き継がれます。
+</p>
+</div>
+</div>
+
 
 <div id="outline-container-sec-9-5" class="outline-3">
 <h3 id="sec-9-5"><span class="section-number-3">9.5</span> <span class="todo TODO">TODO</span> 親pomの設定を変更してみよう</h3>
@@ -2371,8 +2428,7 @@ pom.xmlへの相対パスを記述できます(relativePath)。
 </div>
 </div>
 <div id="postamble" class="status">
-<p class="author">Author: T.Kawasaki</p>
-<p class="date">Created: 2016-02-18 Thu 21:22</p>
+<p class="date">Created: 2016-02-19 Fri 19:49</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>

@@ -3,18 +3,21 @@
 
 ** pomの継承
 
-pom.xmlはひとつの親pom.xmlを持つことができ、親pom.xmlの情報を引き継ぐことができます。
+pom.xmlは親pom.xmlを持つことができ、親pom.xmlの情報を引き継ぐことができます。
+子のpom.xmlは親からの差分を記述します。
 
-複数のモジュール間で共通の設定を使用したい場合に便利です。
+*** 何のためか？
 
-- 共通のプロパティを使用したい（ファイルパス等）
+モジュールが増えてくると、それぞれのpom.xmlに重複が発生するようになります。
+複数のモジュール間で共通の設定を使用したい場合に使用します。
+
+- 共通のプロパティを使用したい（ファイルパス、ファイルエンコーディング等）
 - 使用するプラグインのバージョンを揃えたい
 - プラグインの設定を共通化したい（CheckStyle, FindBugs等）
 
-子のpom.xmlは親からの差分を記述します。
-
-
 ** デフォルトのSuper pom
+
+pom.xmlにはデフォルトの親pom.xmlがあります。
 
 http://maven.apache.org/ref/3.3.9/maven-model-builder/super-pom.html
 
@@ -37,7 +40,7 @@ pom.xmlへの相対パスを記述できます(relativePath)。
 #+END_SRC
 
 そうでない場合、すなわちローカルリポジトリまたはリモートリポジトリに登録されたpom.xmlを
-継承する場合は、relativePathの中身は空にします。
+継承する場合は<relativePath>の中身を空にします。
 
 http://central.maven.org/maven2/org/sonatype/oss/oss-parent/9/oss-parent-9.pom
 
@@ -50,8 +53,34 @@ http://central.maven.org/maven2/org/sonatype/oss/oss-parent/9/oss-parent-9.pom
 </parent>
 #+END_SRC
 
-
-
 ** TODO 親pomを継承してみよう
+
+#+BEGIN_SRC sh
+cd example/parent_pom/my-lib/
+# 修正前の依存関係を表示する
+mvn dependency:tree
+# ファイルを編集して<parent>を追加する
+vi pom.xml
+#+END_SRC
+
+#+BEGIN_SRC xml
+  <parent>
+    <groupId>com.example</groupId>
+    <artifactId>my-parent</artifactId>
+    <version>1.0.0</version>
+    <relativePath>../my-parent</relativePath>
+  </parent>
+
+  <artifactId>my-lib</artifactId>
+  <packaging>jar</packaging>
+#+END_SRC
+
+#+BEGIN_SRC sh
+# 修正前の依存関係を表示する
+mvn dependency:tree
+#+END_SRC
+
+<groupId>と<version>は親pom.xmlから引き継がれます。
+
 
 ** TODO 親pomの設定を変更してみよう
