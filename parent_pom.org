@@ -76,7 +76,7 @@ vi pom.xml
 #+END_SRC
 
 #+BEGIN_SRC sh
-# 修正前の依存関係を表示する
+# 修正後の依存関係を表示する
 mvn dependency:tree
 #+END_SRC
 
