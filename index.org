@@ -1,4 +1,4 @@
-n# -*- mode: org; coding: utf-8-unix -*-
+# -*- mode: org; coding: utf-8-unix -*-
 #+SETUPFILE: ./conf.org
 #+SETUPFILE: ./style.org
 

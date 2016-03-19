@@ -21,12 +21,59 @@ Phase  ..>  Goal : use
 #+RESULTS:
 [[file:resources/lifecycle.png]]
 
-- フェーズはイベントと考えるとわかりやすい
+- フェーズはイベントと考えるとわかりやすい(loadとかDOMContentLoadedとか)
 - ゴールはイベント発生時にコールバックされる処理
 - どのようなゴールが関連付けられているかはpomの設定による(例:mvn package)
 
 #+CAPTION: 「Maven by Example - 3.5.1. Maven Plugins and Goals」 より
 http://books.sonatype.com/mvnex-book/reference/figs/web/simple-project_plugin.png
+
+** ライフサイクル
+
+*** cleanライフサイクル
+
+| フェーズ   |
+|------------|
+| pre-clearn |
+| clearn     |
+| post-clean |
+
+*** defaultライフサイクル
+
+| フェーズ                |
+|-------------------------|
+| validate                |
+| generate-sources        |
+| process-sources         |
+| generate-resources      |
+| process-resources       |
+| *compile*               |
+| process-classes         |
+| generate-test-sources   |
+| process-test-sources    |
+| generate-test-resources |
+| process-test-resources  |
+| test-compile            |
+| *test*                  |
+| prepare-package         |
+| *package*               |
+| pre-integration-test    |
+| integration-test        |
+| post-integration-test   |
+| *verify*                |
+| *install*               |
+| *deploy*                |
+
+	
+*** siteライフサイクル
+
+| フェーズ    |
+|-------------|
+| pre-site    |
+| site        |
+| post-site   |
+| site-deploy |
+
 
 ** フェーズ
 
@@ -36,7 +83,8 @@ http://books.sonatype.com/mvnex-book/reference/figs/web/simple-project_plugin.pn
 |----------+----------------------------------|
 | compile  | コンパイル                       |
 | test     | テスト                           |
-| package  | アーティファクト(jar)を作成      |
+| package  | アーティファクト(jar/war)を作成  |
+| verify   | CheckStyle等を実行               |
 | install  | ローカルリポジトリにインストール |
 | deploy   | リモートリポジトリにデプロイ     |
 
@@ -48,3 +96,41 @@ http://books.sonatype.com/mvnex-book/reference/figs/web/simple-project_plugin.pn
 [[http://books.sonatype.com/mvnex-book/reference/figs/web/simple-project_lifecyclebinding.png]]
 
 
+*** TODO フェーズに関連付けられるプラグインが変更されることを確認しよう
+
+#+BEGIN_SRC sh
+cd example/phase_and_goal
+# まずmvn packageを実行してみる
+mvn package
+
+# pom.xmlの<packaging>jar</packaging>をwarに変更する
+vi pom.xml
+
+# もう一度mvn packageを実行してみる
+mvn package
+#+END_SRC
+
+| フェーズ | <packaging>jar</packaging> | <packaging>war</packaging> |
+|----------+----------------------------+----------------------------|
+| compile  | compiler:comile            | compile:compile            |
+| test     | surefire:test              | surefire:test              |
+| package  | *jar:jar*                  | *war:war*                  |
+
+
+*** TODO 明示的にフェーズを変更してみよう
+
+#+BEGIN_SRC sh
+# mvn verifyを実行する
+cd example/plugin
+mvn -f pom-checkstyle.xml clean verify
+
+# プラグインを実行するフェーズを変更する。
+# 旧: <phase>verify</phase>
+# 新: <phase>validate</phase>
+vi pom-checkstyle.xml
+
+# mvn verifyを実行する
+mvn -f pom-checkstyle.xml clean verify
+#+END_SRC
+
+CheckStyleが実行されるタイミングに変化がありましたか？
