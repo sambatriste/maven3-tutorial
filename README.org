@@ -25,4 +25,4 @@ org-modeで書かれています。Emacsを使われる方はそのままお使�
 
 * ビルド済みHTML
 
-http://sambatriste.github.io/maven3-turorial/
+http://sambatriste.github.io/maven3-tutorial/
