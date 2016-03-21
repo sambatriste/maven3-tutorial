@@ -68,6 +68,7 @@ env.JAVA_HOME
 
 #+BEGIN_SRC sh
 # pom.xmlを編集する
+cd example/maven_props
 vi pom.xml
 # 実行してプロパティを表示する。
 mvn antrun:run
