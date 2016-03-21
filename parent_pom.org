@@ -64,6 +64,7 @@ vi pom.xml
 #+END_SRC
 
 #+BEGIN_SRC xml
+  <!-- 親pomを指定する -->
   <parent>
     <groupId>com.example</groupId>
     <artifactId>my-parent</artifactId>
@@ -71,16 +72,47 @@ vi pom.xml
     <relativePath>../my-parent</relativePath>
   </parent>
 
+  <!-- <groupId>, <version>は親pomから引き継ぐ -->
   <artifactId>my-lib</artifactId>
   <packaging>jar</packaging>
-#+END_SRC
 
-#+BEGIN_SRC sh
-# 修正前の依存関係を表示する
-mvn dependency:tree
+  <!-- versionは親pomの<dependencyManagement>から引き継ぐ-->
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
 #+END_SRC
 
 <groupId>と<version>は親pom.xmlから引き継がれます。
 
+#+BEGIN_SRC sh
+# 修正後の依存関係を表示する
+mvn dependency:tree
+#+END_SRC
+
 
 ** TODO 親pomの設定を変更してみよう
+
+#+BEGIN_SRC sh
+cd example/parent_pom/my-parent
+vi pom.xml
+#+END_SRC
+
+<verion>を4.12にしてみる。
+
+#+BEGIN_SRC xml
+      <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <version>4.12</version>
+      </dependency>
+#+END_SRC
+
+#+BEGIN_SRC sh
+cd ../my-lib
+# 依存関係を表示する
+mvn dependency:tree
+#+END_SRC

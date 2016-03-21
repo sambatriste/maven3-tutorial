@@ -11,3 +11,83 @@
 その際、モジュール間の依存関係に沿って順番にビルドが実行されます。
 
 
+
+
+
+** 複数のモジュールを集約してみよう
+
+*** TODO 個別のモジュールをビルドしてみよう
+
+#+BEGIN_SRC sh
+cd example/mulit_module/my-batch
+# 中身を確認
+less pom.xml
+
+# コンパイルしてみる
+mvn compile
+#+END_SRC
+
+#+BEGIN_EXAMPLE
+[INFO] Scanning for projects...
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building my-batch 1.0.1
+[INFO] ------------------------------------------------------------------------
+Downloading: https://repo.maven.apache.org/maven2/com/example/my-lib/1.0.1/my-lib-1.0.1.pom
+[WARNING] The POM for com.example:my-lib:jar:1.0.1 is missing, no dependency information available
+Downloading: https://repo.maven.apache.org/maven2/com/example/my-lib/1.0.1/my-lib-1.0.1.jar
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 3.875 s
+[INFO] Finished at: 2016-03-21T09:44:40+09:00
+[INFO] Final Memory: 9M/155M
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal on project my-batch: Could not resolve dependencies for project com.example:my-batch:jar:1.0.1: Could not find artifact com.example:my-lib:jar:1.0.1 in central (https://repo.maven.apache.org/maven2) -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/DependencyResolutionException
+#+END_EXAMPLE
+
+- コンパイルに必要な依存ライブラリmy-libをローカルリポジトリに探しに行く
+- my-lib:1.0.1はまだmvn installされていない
+- Mavenセントラルリポジトリからダウンロードしようとする
+- ダウンロードできない（見つからない）のでビルドは失敗する
+
+
+*** TODO 集約してみる
+
+#+BEGIN_SRC sh
+# pom.xml
+cd example/multi_module
+vi pom.xml
+#+END_SRC
+
+#+BEGIN_SRC xml
+  <modules>
+    <module>my-batch</module>
+    <module>my-lib</module>
+    <module>my-web</module>
+  </modules>
+#+END_SRC
+
+
+#+BEGIN_SRC sh
+mvn install
+#+END_SRC
+
+#+BEGIN_EXAMPLE
+[INFO] Scanning for projects...
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Build Order:
+[INFO] 
+[INFO] my-lib
+[INFO] my-batch
+[INFO] my-web
+[INFO] my-aggregate
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+#+END_EXAMPLE
