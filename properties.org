@@ -44,6 +44,16 @@ mvn antrun:run
 - project.artifactId
 
 
+#+BEGIN_SRC sh
+# pom.xmlの内容を確認する
+cd example/maven_props
+vi pom.xml
+
+# 実行してプロパティを表示する。
+mvn antrun:run
+#+END_SRC
+
+
 ** 環境変数
 
 env.<環境変数名>で任意の環境変数を取得できます。
