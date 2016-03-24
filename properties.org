@@ -21,7 +21,7 @@ Mavenがデフォルトで用意しているプロパティがあります。
 | project.compileSourceRoots        | src/main/java       |
 | project.testCompileSourceRoots    | src/test/java       |
 
-プロパティにどんな値が設定されているか表示してみよう。
+*** TODO プロパティにどんな値が設定されているか表示してみよう。
 
 #+BEGIN_SRC sh
 # pom.xmlの内容を確認する
@@ -33,7 +33,7 @@ mvn antrun:run
 #+END_SRC
 
 
-*** その他のプロパティを表示してみよう
+*** TODO その他のプロパティを表示してみよう
 
 以下のプロパティを表示して、どのような値が設定されているか見てみよう。
 
@@ -42,6 +42,16 @@ mvn antrun:run
 - project.version
 - project.build.finalName
 - project.artifactId
+
+
+#+BEGIN_SRC sh
+# pom.xmlの内容を確認する
+cd example/maven_props
+vi pom.xml
+
+# 実行してプロパティを表示する。
+mvn antrun:run
+#+END_SRC
 
 
 ** 環境変数
@@ -54,10 +64,11 @@ env.<環境変数名>で任意の環境変数を取得できます。
 env.JAVA_HOME
 #+END_EXAMPLE
 
-*** 環境変数PATHを表示させてみよう
+*** TODO 環境変数PATHを表示させてみよう
 
 #+BEGIN_SRC sh
 # pom.xmlを編集する
+cd example/maven_props
 vi pom.xml
 # 実行してプロパティを表示する。
 mvn antrun:run
@@ -102,7 +113,7 @@ mvn antrun:run
 </properties>
 #+END_SRC
 
-*** 自分で設定したプロパティを表示してみよう 
+*** TODO 自分で設定したプロパティを表示してみよう 
 
 #+BEGIN_SRC xml
    <echo message="my.prop=${my.prop}"/>

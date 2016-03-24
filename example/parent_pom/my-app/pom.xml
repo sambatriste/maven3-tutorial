@@ -3,12 +3,24 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>com.example</groupId>
-    <artifactId>parent-pom</artifactId>
+    <artifactId>my-parent</artifactId>
     <version>1.0.0</version>
     <relativePath>../my-parent</relativePath>
   </parent>
 
   <artifactId>my-app</artifactId>
   <packaging>jar</packaging>
-  
+
+  <dependencies>
+    <dependency>
+      <groupId>javax</groupId>
+      <artifactId>javaee-web-api</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
 </project>

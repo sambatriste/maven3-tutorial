@@ -1,28 +1,107 @@
 * これは何？
 
-Mavenの使い方を教えたい人のための勉強会教材です（独習教材ではないです）。
+Mavenの使い方を教えたい人のための勉強会教材です（独習教材ではないです）。
 
 
-使い方を教える人はだいたい忙しいので、勉強会の準備をするひまを確保するのがなかなか大変だったりします。
-そこで、あまり準備に手間をかけずにハンズオン形式の勉強会を開催できるよう教材を用意しました。
+使い方を教える人はだいたい忙しいので、勉強会の準備をするひまを確保するのがなかなか大変だったりします。
+そこで、あまり準備に手間をかけずにハンズオン形式の勉強会を開催できるよう教材を用意しました。
 
 以下の点に留意して作成しました。
 
-- 参加者が手を動かして動作を確認できるようにする。
-- 長文での説明は避ける（開催者が自分の言葉で語ることを期待）。
+- 参加者が手を動かして動作を確認できるようにする。
+- 長文での説明は避ける（開催者が自分の言葉で語ることを期待）。
 
 
 * 文書修正したい場合
 
-org-modeで書かれています。Emacsを使われる方はそのままお使いください。
+org-modeで書かれています。Emacsを使われる方はそのままお使いください。
 
-そうでない方は、以下のような対処をお願いします。
+そうでない方は、以下のような対処をお願いします。
 
-- pandocでMarkdown等に変換する
-- exportする時だけEmacsを使う
-- org-ruby等でorgファイルからHTMLを出力する
-- HTMLをオーサリングツールなどで編集する
+- pandocでMarkdown等に変換する
+- exportする時だけEmacsを使う
+- org-ruby等でorgファイルからHTMLを出力する
+- HTMLをオーサリングツールなどで編集する
 
-* ビルド済みHTML
+* ビルド済みHTML
 
 http://sambatriste.github.io/maven3-tutorial/
+
+* 参加者の事前準備
+
+**  JDKをインストールする
+
+#+BEGIN_SRC sh
+java -verion
+#+END_SRC
+
+#+BEGIN_EXAMPLE
+java version "1.8.0_71"
+Java(TM) SE Runtime Environment (build 1.8.0_71-b15)
+Java HotSpot(TM) 64-Bit Server VM (build 25.71-b15, mixed mode)
+#+END_EXAMPLE
+
+** Maven3をインストールする
+
+#+BEGIN_SRC sh
+mvn -version
+#+END_SRC
+
+#+BEGIN_EXAMPLE
+Apache Maven 3.3.9 (bb52d8502b132ec0a5a3f4c09453c07478323dc5; 2015-11-11T01:41:47+09:00)
+Maven home: /usr/local/Cellar/maven/3.3.9/libexec
+Java version: 1.8.0_71, vendor: Oracle Corporation
+Java home: /Library/Java/JavaVirtualMachines/jdk1.8.0_71.jdk/Contents/Home/jre
+Default locale: ja_JP, platform encoding: UTF-8
+OS name: "mac os x", version: "10.11.3", arch: "x86_64", family: "mac"
+#+END_EXAMPLE
+
+** (Optional)プロキシ設定を行う。
+
+
+https://maven.apache.org/guides/mini/guide-proxies.html
+
+#+BEGIN_SRC sh
+
+cd ~/.m2/
+
+# settings.xmlが無い場合は作成する。
+touch settings.xml
+
+# proxy設定を記載する
+vi settings.xml
+#+END_SRC
+
+#+BEGIN_SRC xml
+<settings>
+  .
+  .
+  <proxies>
+   <proxy>
+      <id>example-proxy</id>
+      <active>true</active>
+      <protocol>http</protocol>
+      <host>proxy.example.com</host>
+      <port>8080</port>
+      <username>proxyuser</username>
+      <password>somepassword</password>
+      <nonProxyHosts>www.google.com|*.example.com</nonProxyHosts>
+    </proxy>
+  </proxies>
+  .
+  .
+</settings>
+#+END_SRC
+
+使用するプロキシに認証がなければusername,passwordは記載しない。
+
+** この教材をダウンロードする。
+
+
+https://github.com/sambatriste/maven3-tutorial
+
+以下のいずれかを行う。
+
+- git cloneする。
+- "Download ZIP"をクリックしてダウンロードし、任意のディレクトリに解凍する。
+
