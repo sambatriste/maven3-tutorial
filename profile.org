@@ -1,0 +1,161 @@
+# -*- mode: org; coding: utf-8-unix -*-
+#+SETUPFILE: ./conf.org
+
+** この章のねらい
+
+- mavenの「プロファイル」が何者か概要を理解しよう
+- プロファイルの切替ができるようにしよう
+- どのプロファイルが有効であるか調べられるようにしよう
+
+** プロファイルとは
+
+プロファイルとは、かんたんにいうと、pom.xml内のif文です。
+
+典型的には、リリース環境のちがいによってビルドの設定を変える用途に使います。
+（テスト環境用にはこういうビルドをする、本番用環境用にはこういうビルドをする）
+
+** プロファイルの定義方法
+
+pom.xml内で、
+#+BEGIN_SRC xml
+<profiles>
+  <profile>
+    <id>foo</id>
+    <!-- ここに何か書く -->
+  </profile>
+</profiles>
+#+END_SRC
+
+のように記述することで、fooという名前のプロファイルが作成できます。
+
+コマンド実行時に、-Pオプションを付けるとプロファイルの有効/無効を切り替えることができます。
+上記の例だと、fooプロファイルが有効な時だけ、<profile>タグ内の設定が有効になります。
+
+** プロファイルの有効化・無効化
+
+プロファイルの有効化・無効化をしてみよう
+
+*** TODO pom.xmlを内容を確認します。
+
+#+BEGIN_SRC sh
+cd example/profile/
+less pom.xml
+#+END_SRC
+
+#+BEGIN_SRC xml
+  <profiles>
+    <profile>
+      <id>en</id>
+      <properties>
+        <greeting.message>Hello!</greeting.message>
+      </properties>
+    </profile>
+    <profile>
+      <id>ja</id>
+      <properties>
+        <greeting.message>こんにちは!</greeting.message>
+      </properties>
+    </profile>
+  </profiles>
+#+END_SRC
+
+- enとjaというプロファイルが定義されています。
+- enというプロファイルはデフォルトで有効になっています。
+
+*** TODO プロファイルをenを有効にする。
+
+#+BEGIN_SRC sh
+mvn -P morning antrun:run
+#+END_SRC
+
+*** TODO プロファイルjaを有効にする。
+
+#+BEGIN_SRC sh
+mvn -P jar antrun:run
+#+END_SRC
+
+*** TODO プロファイル指定なしで実行する。
+
+#+BEGIN_SRC sh
+mvn antrun:run
+#+END_SRC
+
+#+BEGIN_EXAMPLE
+[INFO] --- maven-antrun-plugin:1.3:run (default-cli) @ profile-test ---
+[INFO] Executing tasks
+     [echo] ${greeting.message}
+[INFO] Executed tasks
+#+END_EXAMPLE
+
+プロパティgreeting.messageが設定されなくなったので、プロパティがそのまま表示されてしまいました。
+
+*** TODO デフォルトで有効なプロファイルを設定する
+
+ほぼ毎回、有効にしているプロファイルがある場合、
+そのプロファイルをデフォルトで有効になるよう設定できます。
+
+#+BEGIN_SRC xml
+  <profiles>
+    <profile>
+      <id>en</id>
+      <!-- このプロファイルをデフォルト有効にする。-->
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <properties>
+        <greeting.message>Hello!</greeting.message>
+      </properties>
+    </profile>
+
+#+END_SRC
+
+#+BEGIN_SRC sh
+mvn antrun:run
+#+END_SRC
+
+デフォルトでプロファイルenが有効になりました。
+
+#+BEGIN_EXAMPLE
+[INFO] --- maven-antrun-plugin:1.3:run (default-cli) @ profile-test ---
+[INFO] Executing tasks
+     [echo] Hello!
+[INFO] Executed tasks
+#+END_EXAMPLE
+
+*** TODO プロファイルを無効にする。
+
+デフォルトでenが有効になっているので、これを無効にして、jaを有効にします。
+
+#+BEGIN_SRC sh
+mvn -P-en,ja antrun:run 
+#+END_SRC
+
+#+BEGIN_EXAMPLE
+[INFO] --- maven-antrun-plugin:1.3:run (default-cli) @ profile-test ---
+[INFO] Executing tasks
+     [echo] こんにちは!
+[INFO] Executed tasks
+#+END_EXAMPLE
+
+** どのプロファイルが有効かを確認する
+
+*** TODO mvn helpで確認してみましょう。
+
+#+BEGIN_SRC sh
+mvn help:all-profiles
+#+END_SRC
+
+#+BEGIN_EXAMPLE
+[INFO] --- maven-help-plugin:2.2:all-profiles (default-cli) @ profile-test ---
+[INFO] Listing Profiles for Project: com.example:profile-test:jar:1.0.0
+  Profile Id: en (Active: true , Source: pom)
+  Profile Id: ja (Active: false , Source: pom)
+#+END_EXAMPLE
+
+*** TODO プロファイルを切り替えてmvn helpを実行してみましょう。
+
+#+BEGIN_SRC sh
+mvn -P-en,ja help:all-profiles 
+#+END_SRC
+
+どう変化しましたか？

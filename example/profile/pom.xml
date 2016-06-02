@@ -1,0 +1,47 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.example</groupId>
+  <artifactId>profile-test</artifactId>
+  <version>1.0.0</version>
+  
+  <name>profile-test</name>
+
+  <profiles>
+    <profile>
+      <id>en</id>
+      <properties>
+        <greeting.message>Hello!</greeting.message>
+      </properties>
+    </profile>
+    <profile>
+      <id>ja</id>
+      <properties>
+        <greeting.message>こんにちは!</greeting.message>
+      </properties>
+    </profile>
+  </profiles>
+
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-antrun-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>default-cli</id>
+            <goals>
+              <goal>run</goal>
+            </goals>
+            <configuration>
+              <tasks>
+                <!-- プロファイルによって、メッセージが変わる -->
+                <echo message="${greeting.message}"/>
+              </tasks>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+</project>

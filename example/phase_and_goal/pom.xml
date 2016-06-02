@@ -6,7 +6,7 @@
   <artifactId>hello</artifactId>
   <version>1.0.0</version>
   <!-- TODO: packagingをwarにしてみよう -->
-  <packaging>jar</packaging>
+  <packaging>war</packaging>
 
   <name>hello</name>
 

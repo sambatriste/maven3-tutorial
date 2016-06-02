@@ -185,7 +185,7 @@ mvn install:install-file -Dfile=<ファイル>
 #+END_SRC
 
 
-#+BEGIN_SRC 
+#+BEGIN_SRC sh
 # jarとpomをダウンロードする
 wget https://repo.maven.apache.org/maven2/joda-time/joda-time/2.9.2/joda-time-2.9.2.jar
 wget https://repo.maven.apache.org/maven2/joda-time/joda-time/2.9.2/joda-time-2.9.2.pom

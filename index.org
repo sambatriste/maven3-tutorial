@@ -47,3 +47,6 @@
 #+INCLUDE: multi_module.org
 
 
+* プロファイル
+
+#+INCLUDE: profile.org

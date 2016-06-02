@@ -8,7 +8,7 @@
 
   <!-- ここにプロパティを設定できます。-->
   <properties>
-    <my.prop>MY PROPERTY</my.prop>
+    <my.prop>ああああああ</my.prop>
   </properties>
   
   <build>
@@ -29,6 +29,9 @@
                 <echo message="project.compileSourceRoots=${project.compileSourceRoots}"/>
                 <echo message="project.testCompileSourceRoots=${project.testCompileSourceRoots}"/>
                 <echo message="my.prop=${my.prop}"/>
+
+                <echo message="project.basedir=${project.basedir}"/>
+
               </tasks>
             </configuration>
           </execution>
