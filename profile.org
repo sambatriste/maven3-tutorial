@@ -68,6 +68,15 @@ less pom.xml
 mvn -P morning antrun:run
 #+END_SRC
 
+メッセージが表示されます。
+
+#+BEGIN_EXAMPLE
+[INFO] --- maven-antrun-plugin:1.3:run (default-cli) @ profile-test ---
+[INFO] Executing tasks
+     [echo] Hello!
+[INFO] Executed tasks
+#+END_EXAMPLE
+
 *** TODO プロファイルjaを有効にする。
 
 #+BEGIN_SRC sh
