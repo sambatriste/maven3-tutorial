@@ -12,9 +12,18 @@
 
 
 
-
-
 ** 複数のモジュールを集約してみよう
+
+#+BEGIN_SRC plantuml :file resources/multi_module.png :cmdline -charset UTF-8
+
+[my-lib] as lib
+[my-web] ..> lib
+[my-batch] ..> lib
+
+
+#+END_SRC
+
+
 
 *** TODO 個別のモジュールをビルドしてみよう
 

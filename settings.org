@@ -1,0 +1,59 @@
+# -*- mode: org; coding: utf-8-unix -*-
+#+SETUPFILE: ./conf.org
+
+** settings.xml
+
+*** 何を書くか
+
+個々のpom.xmlでなく、一律で設定したい情報
+
+- 共通の設定
+  - プロキシ設定
+  - デプロイ設定
+    - デプロイ先のURL
+    - ユーザ名、パスワード
+
+*** どこに書くか
+
+| 配置場所                                          | 用途                     |
+|---------------------------------------------------+--------------------------|
+| <Mavenインストールディレクトリ>/conf/settings.xml | システム（マシン）で共通 |
+| $HOME/.m2/settings.xml                            | ユーザ毎                 |
+
+初期状態では、$HOME/.m2/settings.xmlは存在しないので、自分で配置する。
+
+*** TODO システムのsettings.xmlを見てみよう。
+
+#+BEGIN_SRC sh
+# mavenインストールディレクトリに移動
+cd /path/to/maven
+# configディレクトリ配下のsettings.xmlを開く
+less config/settings.xml
+#+END_SRC
+
+**** プロキシ設定
+
+#+BEGIN_SRC xml
+<proxies>
+  <proxy>
+    <id>MyProxy</id>
+    <active>true</active>
+    <protocol>http</protocol>
+    <host>proxy.host.net</host>
+    <port>8080</port>
+    <nonProxyHosts>local.net|some.host.com</nonProxyHosts>
+  </proxy>
+</proxies>
+#+END_SRC
+
+**** デプロイ設定
+
+#+BEGIN_SRC xml
+<servers>
+  <server>
+    <id>OurRepository</id>
+    <username>repouser</username>
+    <password>repopwd</password>
+  </server>
+</servers>  
+#+END_SRC

@@ -56,7 +56,21 @@ http://central.maven.org/maven2/org/sonatype/oss/oss-parent/9/oss-parent-9.pom
 ** TODO 親pomを継承してみよう
 
 #+BEGIN_SRC sh
-cd example/parent_pom/my-lib/
+# 親pomの内容を確認する
+cd example/parent_pom/my-parent/
+less pom.xml
+
+# 依存関係を表示する
+mvn dependency:tree
+#+END_SRC
+
+親pomの依存関係には何も表示されません。\\
+- <dependencies> 依存関係に含める
+- <dependencyManagement> 定義のみ（子で利用する）
+
+#+BEGIN_SRC sh
+# 子pom
+cd ../my-lib/
 # 修正前の依存関係を表示する
 mvn dependency:tree
 # ファイルを編集して<parent>を追加する
