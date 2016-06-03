@@ -1,29 +1,29 @@
 * これは何？
 
-Mavenの使い方を教えたい人のための勉強会教材です（独習教材ではないです）。
+Mavenの使い方を教えたい人のための勉強会教材です（独習教材ではないです）。
 
 
-使い方を教える人はだいたい忙しいので、勉強会の準備をするひまを確保するのがなかなか大変だったりします。
-そこで、あまり準備に手間をかけずにハンズオン形式の勉強会を開催できるよう教材を用意しました。
+使い方を教える人はだいたい忙しいので、勉強会の準備をするひまを確保するのがなかなか大変だったりします。
+そこで、あまり準備に手間をかけずにハンズオン形式の勉強会を開催できるよう教材を用意しました。
 
 以下の点に留意して作成しました。
 
-- 参加者が手を動かして動作を確認できるようにする。
-- 長文での説明は避ける（開催者が自分の言葉で語ることを期待）。
+- 参加者が手を動かして動作を確認できるようにする。
+- 長文での説明は避ける（開催者が自分の言葉で語ることを期待）。
 
 
 * 文書修正したい場合
 
-org-modeで書かれています。Emacsを使われる方はそのままお使いください。
+org-modeで書かれています。Emacsを使われる方はそのままお使いください。
 
-そうでない方は、以下のような対処をお願いします。
+そうでない方は、以下のような対処をお願いします。
 
-- pandocでMarkdown等に変換する
-- exportする時だけEmacsを使う
-- org-ruby等でorgファイルからHTMLを出力する
-- HTMLをオーサリングツールなどで編集する
+- pandocでMarkdown等に変換する
+- exportする時だけEmacsを使う
+- org-ruby等でorgファイルからHTMLを出力する
+- HTMLをオーサリングツールなどで編集する
 
-* ビルド済みHTML
+* ビルド済みHTML
 
 http://sambatriste.github.io/maven3-tutorial/
 
@@ -56,7 +56,7 @@ Default locale: ja_JP, platform encoding: UTF-8
 OS name: "mac os x", version: "10.11.3", arch: "x86_64", family: "mac"
 #+END_EXAMPLE
 
-** (Optional)プロキシ設定を行う。
+** (Optional)プロキシ設定を行う。
 
 
 https://maven.apache.org/guides/mini/guide-proxies.html
@@ -65,7 +65,7 @@ https://maven.apache.org/guides/mini/guide-proxies.html
 
 cd ~/.m2/
 
-# settings.xmlが無い場合は作成する。
+# settings.xmlが無い場合は作成する。
 touch settings.xml
 
 # proxy設定を記載する
@@ -93,15 +93,67 @@ vi settings.xml
 </settings>
 #+END_SRC
 
-使用するプロキシに認証がなければusername,passwordは記載しない。
+使用するプロキシに認証がなければusername,passwordは記載しない。
 
-** この教材をダウンロードする。
+** この教材をダウンロードする。
 
 
 https://github.com/sambatriste/maven3-tutorial
 
-以下のいずれかを行う。
+以下のいずれかを行う。
 
 - git cloneする。
-- "Download ZIP"をクリックしてダウンロードし、任意のディレクトリに解凍する。
+- "Download ZIP"をクリックしてダウンロードし、任意のディレクトリに解凍する。
+
+
+* 参考文献
+
+Mavenの情報は古いものが多いので、更新日等に注意する必要があります。
+
+** Sonatype
+
+一番おすすめです。
+充実しています。情報も比較的新しめです。
+英語ですが難しくはないと思います。
+
+*** Maven By Example
+
+http://books.sonatype.com/mvnex-book/reference/index.html
+
+*** Maven: The Complete Reference
+
+http://books.sonatype.com/mvnref-book/reference/index.html
+
+
+** Maven3のはじめかた
+
+Maven3をターゲットにした日本語のまとまった文書は貴重です。
+Maven3でのプラグイン作成について言及があり、こちらもレアアイテムです。
+
+https://www.gitbook.com/read/book/kengotoda/what-is-maven
+
+
+** TECHSCORE
+
+Maven2の情報ですが、日本語で読めます。
+
+http://www.techscore.com/tech/Java/ApacheJakarta/Maven/index/
+
+** nulab
+
+これもMaven2の情報ですが、日本語で読めます。
+
+http://www.nulab.co.jp/kousei/chapter4/01.html
+
+** そこ仁
+
+意見はいろいろあるかもですが、他にはない、とても実践的な内容になっています。
+
+*** 受託開発でGitとmavenを使って開発をしている
+
+http://syobochim.hatenablog.com/entry/2015/07/26/234605
+
+*** これが大規模SIerな弊社のデファクトスタンダードな開発スタイルだ！！
+
+http://syobochim.hatenablog.com/entry/2015/09/03/214050
 
