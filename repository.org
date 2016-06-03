@@ -190,3 +190,20 @@ wget https://repo.maven.apache.org/maven2/joda-time/joda-time/2.9.2/joda-time-2.
 mvn install:install-file -Dfile=joda-time-2.9.2.jar -DpomFile=joda-time-2.9.2.pom
 #+END_SRC
 
+**** ローカルリポジトリ上の_remote.repositoriesファイルを削除する。
+
+ローカルリポジトリにjarが存在するにもかかわらず、その取得元リモートリポジトリにアクセスできない場合、
+エラーになるようです。
+
+#+BEGIN_EXAMPLE
+[ERROR] Failed to execute goal on project my-app: Could not resolve dependencies for project nablarch.example:my-app:war:1.0.1: Failed to collect dependencies at his-library:jar:1.0.5: Failed to read artifact descriptor for his-library:jar:1.0.5: Could not find artifact his-bom:pom:1.0.4 in central (https://repo.maven.apache.org/maven2) -> [Help 1]
+#+END_EXAMPLE
+
+他の人のローカルリポジトリをまるごとコピーしたような場合に、
+上記のようなエラーが出ることがあります。
+
+_remote.repositoriesというファイルには、そのアーティファクトをどこから取得したか
+という情報が記載されているようです。
+このファイルを削除すると、エラーは解消します。
+
+
