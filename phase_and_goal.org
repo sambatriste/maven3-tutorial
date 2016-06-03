@@ -25,8 +25,9 @@ Phase  ..>  Goal : use
 - ゴールはイベント発生時にコールバックされる処理
 - どのようなゴールが関連付けられているかはpomの設定による(例:mvn package)
 
-#+CAPTION: 「Maven by Example - 3.5.1. Maven Plugins and Goals」 より
+#+CAPTION: [[http://books.sonatype.com/mvnex-book/reference/simple-project-sect-simple-core.html][「Maven by Example - 3.5.1. Maven Plugins and Goals」]] より( http://www.sonatype.com )
 http://books.sonatype.com/mvnex-book/reference/figs/web/simple-project_plugin.png
+
 
 ** ライフサイクル
 
@@ -92,7 +93,7 @@ http://books.sonatype.com/mvnex-book/reference/figs/web/simple-project_plugin.pn
 各フェーズに登録されたゴールが実行されることによってビルドが行われます。
 ゴールはプラグインが提供します。
 
-#+CAPTION: 「Maven by Example - 3.5.2. Maven Lifecycle」 より
+#+CAPTION: [[http://books.sonatype.com/mvnex-book/reference/simple-project-sect-simple-core.html][「Maven by Example - 3.5.2. Maven Lifecycle」]] より ( http://www.sonatype.com )
 [[http://books.sonatype.com/mvnex-book/reference/figs/web/simple-project_lifecyclebinding.png]]
 
 
